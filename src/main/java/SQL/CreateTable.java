@@ -1,6 +1,6 @@
-
 package SQL;
-import java.sql.Connection;  
+
+import java.sql.Connection;
     import java.sql.DriverManager;  
     import java.sql.SQLException;  
     import java.sql.Statement;  
@@ -9,7 +9,7 @@ import java.sql.Connection;
        
         public static void createNewTable() {  
             // SQLite connection string  
-            String url = "jdbc:sqlite:C://sqlite/INF453.db";  
+            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
               
             // SQL statement for creating a new table  
             String sql = "CREATE TABLE IF NOT EXISTS employees (\n"  

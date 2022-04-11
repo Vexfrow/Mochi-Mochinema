@@ -1,5 +1,6 @@
 package SQL;
-    import java.sql.DriverManager;  
+
+import java.sql.DriverManager;
     import java.sql.Connection;  
     import java.sql.ResultSet;  
     import java.sql.SQLException;  
@@ -9,7 +10,7 @@ package SQL;
        
         private Connection connect() {  
             // SQLite connection string  
-            String url = "jdbc:sqlite:C://sqlite/INF453.db";  
+            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
             Connection conn = null;  
             try {  
                 conn = DriverManager.getConnection(url);  
