@@ -4,7 +4,10 @@ import java.sql.DriverManager;
     import java.sql.Connection;  
     import java.sql.ResultSet;  
     import java.sql.SQLException;  
-    import java.sql.Statement;  
+    import java.sql.Statement;
+
+import mochinema.Abonne;
+import mochinema.Date;  
        
     public class SelectRecords {  
        
@@ -21,8 +24,8 @@ import java.sql.DriverManager;
         }  
        
       
-        public void selectAll(){  
-            String sql = "SELECT * FROM employees";  
+        public void selectAllAbonne(){  
+            String sql = "SELECT * FROM abonne";  
               
             try {  
                 Connection conn = this.connect();  
@@ -31,22 +34,47 @@ import java.sql.DriverManager;
                   
                 // loop through the result set  
                 while (rs.next()) {  
-                    System.out.println(rs.getInt("id") +  "\t" +   
-                                       rs.getString("name") + "\t" +  
-                                       rs.getDouble("capacity"));  
+                    System.out.println(rs.getString("abonne_pseudo") +  "\t" +   
+                                       rs.getString("abonne_prenom") + "\t" +  
+                                       rs.getString("abonne_nom"));  
                 }  
             } catch (SQLException e) {  
                 System.out.println(e.getMessage());  
             }  
         }  
-          
+
+
+
+        public Abonne selectAbonneSpecifique(String pseudo, String mdp){  
+            String sql = "SELECT * FROM abonne \n WHERE abonne_pseudo = '"+pseudo+"' AND abonne_mot_de_passe = '"+mdp+"';";  
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sql);  
+                  
+                // loop through the result set  
+                if (!rs.isBeforeFirst()) {  
+                    return null;  
+                } else{
+                    Date d = new Date(rs.getString("abonne_date_naissance"));
+                    Abonne a = new Abonne(rs.getString("abonne_pseudo"), rs.getString("abonne_nom"), rs.getString("abonne_prenom"), rs.getString("abonne_adresse_mail"), rs.getString("abonne_mot_de_passe"), d);
+                    return a;
+                }
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage());  
+                return null;
+            }  
+        }  
+           
          
         /** 
          * @param args the command line arguments 
          */  
         public static void main(String[] args) {  
             SelectRecords app = new SelectRecords();  
-            app.selectAll();  
+            // app.selectAll();  
+            app.selectAllAbonne();
         }  
        
     }  
