@@ -3,8 +3,13 @@ package ui;
 import java.io.IOException;
 
 import SQL.InsertRecords;
+import SQL.SelectRecords;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import mochinema.Abonne;
 import mochinema.Date;
 
@@ -37,15 +42,42 @@ public class InscriptionController {
 
     @FXML
     private void Confirmer() throws IOException{
-        if(text_birthday.getText()!=null && text_mdp1.getText()!=null && text_mdp2.getText()!=null && text_mail.getText()!=null && text_nom.getText()!=null && text_prenom.getText()!=null && text_pseudo.getText()!=null){
-            Date dateNaissance = new Date(text_birthday.getText());
-            a = new Abonne(text_pseudo.getText(), text_nom.getText(), text_prenom.getText(), text_mail.getText(), text_mdp1.getText(), dateNaissance);
-            
-            InsertRecords ir = new InsertRecords();
-            ir.insertAbonne(a.getPseudo(), a.getNom(), a.getPrenom(), a.getMail(), text_birthday.getText(), a.getMDP());
-            App.setRoot("home");
-        }   
+        if(text_birthday.getText().length()!=0 && text_mdp1.getText().length()!=0 && text_mdp2.getText().length()!=0 && text_mail.getText().length()!=0 && text_nom.getText().length()!=0 && text_prenom.getText().length()!=0 && text_pseudo.getText().length()!=0){
 
+            if(text_mdp1.getText().equals(text_mdp2.getText())){
+                
+                
+                SelectRecords sr = new SelectRecords();
+                if(sr.abonneExist(text_pseudo.getText())){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Le pseudo est déjà pris par un autre utilisateur. Veuillez choisir un autre pseudo !");
+                    alert.setHeaderText(null);
+                    alert.showAndWait();
+
+                }else{
+                    Date dateNaissance = new Date(text_birthday.getText());
+                    a = new Abonne(text_pseudo.getText(), text_nom.getText(), text_prenom.getText(), text_mail.getText(), text_mdp1.getText(), dateNaissance);
+
+                    InsertRecords ir = new InsertRecords();
+                    ir.insertAbonne(a.getPseudo(), a.getNom(), a.getPrenom(), a.getMail(), text_birthday.getText(), a.getMDP());
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Votre compte a bien été crée. \nBienvenue " + a.getPrenom() + " " + a.getNom() + " !");
+                    alert.setHeaderText(null);
+                    alert.showAndWait();
+
+                    App.setRoot("main");
+                }
+
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Les mots de passe ne corresponds pas, veuillez verifier les informations rentrées !");
+                alert.setHeaderText(null);
+                alert.showAndWait();
+
+            }
+
+        }
     }
 
 

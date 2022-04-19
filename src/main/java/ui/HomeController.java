@@ -22,7 +22,7 @@ public class HomeController {
     }
 
     @FXML
-    private void Invite(){
-        
+    private void Invite() throws IOException{
+        App.setRoot("main");
     }
 }

@@ -66,6 +66,45 @@ import mochinema.Date;
                 return null;
             }  
         }  
+
+
+        public boolean abonneExist(String pseudo){  
+            String sql = "SELECT * FROM abonne \n WHERE abonne_pseudo = '"+pseudo+"' ;";  
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sql);  
+                  
+                // loop through the result set  
+                return (rs.isBeforeFirst());
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage());  
+                return false;
+            }  
+        }  
+
+
+
+        public String getMDPAbonne(String pseudo){  
+            String sql = "SELECT * FROM abonne \n WHERE abonne_pseudo = '"+pseudo+"' ;";  
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sql);  
+                  
+                // loop through the result set  
+                return rs.getString("abonne_mot_de_passe");
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage());  
+                return null;
+            }  
+        }  
+
+
+
+
            
          
         /** 
