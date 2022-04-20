@@ -14,13 +14,6 @@ public class App extends Application {
     private static Scene scene;
     static Stage stage;
 
-    // @Override
-    // public void start(Stage stage) throws IOException {
-    //     scene = new Scene(loadFXML("home"), 640, 480);
-    //     stage.setScene(scene);
-    //     stage.show();
-    // } 
-
 
     @Override
     public void start(Stage stage) throws IOException 

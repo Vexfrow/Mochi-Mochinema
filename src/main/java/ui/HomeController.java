@@ -1,11 +1,17 @@
 package ui;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import SQL.SelectRecords;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import mochinema.Abonne;
 import mochinema.Date;
 
@@ -22,7 +28,10 @@ public class HomeController {
     @FXML
     private TextField text_mdp;
 
-    private Abonne a;
+    @FXML
+    private ImageView image_test;
+
+    public Abonne a;
 
     private final Date d = new Date("00/00/0000");
     private final Abonne invite = new Abonne("Invite", "Invite","Invite","Invite", "Invite", d);
@@ -60,9 +69,19 @@ public class HomeController {
     @FXML
     private void Invite() throws IOException{
         a = invite;
+
         App.newScene("main");
         
     }
+
+    @FXML
+    private void initialize() throws FileNotFoundException{
+
+        Image image = new Image(new FileInputStream("./src/main/resources/image/test.png"));
+        image_test.setImage(image);
+        
+    }
+
 
     
 }

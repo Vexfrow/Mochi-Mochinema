@@ -4,14 +4,14 @@ import java.io.IOException;
 
 import SQL.DeleteRecords;
 import SQL.SelectRecords;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
+
 import mochinema.Abonne;
 import mochinema.Date;
 
@@ -37,9 +37,6 @@ public class ProfilController {
 
     @FXML
     private TextField text_nouveauMDP2;
-
-    private Stage stage = App.stage;
-
 
 
     private Date d = new Date("11/06/2004");
