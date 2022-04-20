@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import mochinema.Abonne;
 import mochinema.Date;
 
@@ -37,6 +38,8 @@ public class ProfilController {
     @FXML
     private TextField text_nouveauMDP2;
 
+    private Stage stage = App.stage;
+
 
 
     private Date d = new Date("11/06/2004");
@@ -51,7 +54,7 @@ public class ProfilController {
         if(ButtonType.YES.equals(result)){
             DeleteRecords dr = new DeleteRecords();
             dr.deleteAbonne(a.getPseudo());
-            App.setRoot("home");
+            App.newScene("home");
 
             alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Votre compte a bien été supprimé. \nOn espere vous revoir bientôt !");
@@ -64,7 +67,7 @@ public class ProfilController {
 
     @FXML
     private void Exit() throws IOException{
-        App.setRoot("main");
+        App.newScene("main");
         
     }
 

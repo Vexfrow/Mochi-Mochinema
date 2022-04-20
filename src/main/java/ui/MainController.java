@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class MainController {
 
@@ -13,7 +14,7 @@ public class MainController {
 
     @FXML
     private void Profil() throws IOException{
-        App.setRoot("profil");
+        App.newScene("profil");
     }
     
 }

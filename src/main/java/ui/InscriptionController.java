@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 import mochinema.Abonne;
 import mochinema.Date;
 
@@ -66,7 +67,7 @@ public class InscriptionController {
                     alert.setHeaderText(null);
                     alert.showAndWait();
 
-                    App.setRoot("main");
+                    App.newScene("main");
                 }
 
             }else{
@@ -83,7 +84,7 @@ public class InscriptionController {
 
     @FXML
     private void Exit() throws IOException{
-        App.setRoot("home");
+        App.newScene("home");
     }
 
 
