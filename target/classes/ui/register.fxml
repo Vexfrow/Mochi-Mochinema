@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.InscriptionController">
+   <children>
+      <TextField fx:id="text_pseudo" layoutX="31.0" layoutY="201.0" promptText="Pseudo" />
+      <TextField fx:id="text_prenom" layoutX="342.0" layoutY="69.0" promptText="Prenom" />
+      <TextField fx:id="text_mdp1" layoutX="225.0" layoutY="201.0" promptText="Mot de passe " />
+      <TextField fx:id="text_mail" layoutX="342.0" layoutY="124.0" promptText="Adresse Mail" />
+      <TextField fx:id="text_nom" layoutX="105.0" layoutY="69.0" promptText="Nom" />
+      <TextField fx:id="text_birthday" layoutX="105.0" layoutY="124.0" promptText="JJ/MM/AAAA" />
+      <TextField fx:id="text_mdp2" layoutX="416.0" layoutY="201.0" promptText="Mot de passe " />
+      <Button fx:id="button_confirmer" layoutX="216.0" layoutY="288.0" mnemonicParsing="false" onAction="#Confirmer" prefHeight="58.0" prefWidth="168.0" text="Confirmer" />
+      <Button fx:id="button_retour" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Exit" text="Exit" />
+   </children>
+</Pane>

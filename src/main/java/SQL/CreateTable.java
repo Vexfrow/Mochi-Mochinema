@@ -108,6 +108,81 @@ import java.sql.Connection;
         } 
 
 
+        public static void createNewTableAbonne() {  
+            // SQLite connection string  
+            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
+              
+            // SQL statement for creating a new table  
+            String sql = "CREATE TABLE IF NOT EXISTS Abonne (\n"  
+                    + "abonne_pseudo TEXT PRIMARY KEY,\n"  
+                    + "abonne_nom TEXT NOT NULL,\n"  
+                    + "abonne_prenom TEXT NOT NULL,\n"
+                    + "abonne_adresse_mail TEXT NOT NULL,\n"  
+                    + "abonne_date_naissance Date,\n"
+                    + "abonne_mot_passe TEXT NOT NULL\n"
+                    + ");";  
+              
+            try{  
+                Connection conn = DriverManager.getConnection(url);  
+                Statement stmt = conn.createStatement();  
+                stmt.execute(sql); 
+                System.out.println("A new table has been created.");
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage());  
+            }  
+        } 
+
+        public static void createNewTableCritique() {  
+            // SQLite connection string  
+            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
+              
+            // SQL statement for creating a new table  
+            String sql = "CREATE TABLE IF NOT EXISTS Critique (\n"  
+                    + "abonne_pseudo TEXT,\n"  
+                    + "film_id INTEGER,\n"  
+                    + "critique_critique VARCHAR(240) NOT NULL,\n"
+                    + "critique_note INTEGER,\n"  
+                    + "CONSTRAINT pk_critique_pseudo_id PRIMARY KEY (abonne_pseudo, film_id),\n"
+                    + "CONSTRAINT fk_critique_pseudo FOREIGN KEY (abonne_pseudo) REFERENCES Abonne (abonne_pseudo) ON DELETE CASCADE ON UPDATE CASCADE,\n"
+                    + "CONSTRAINT fk_critique_film FOREIGN KEY (film_id) REFERENCES Film(film_id) ON DELETE CASCADE ON UPDATE CASCADE,\n"
+                    + "CONSTRAINT ck_critique_note CHECK (critique_note >= 0 AND critique_note <= 10), \n"
+                    + "CONSTRAINT ck_critique_taille CHECK (LENGTH(critique_critique) <= 240) \n"
+                    + ");";  
+              
+            try{  
+                Connection conn = DriverManager.getConnection(url);  
+                Statement stmt = conn.createStatement();  
+                stmt.execute(sql); 
+                System.out.println("A new table has been created.");
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage());  
+            }  
+        }
+
+        public static void createNewTablePrix() {  
+            // SQLite connection string  
+            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
+              
+            // SQL statement for creating a new table  
+            String sql = "CREATE TABLE IF NOT EXISTS Prix (\n"  
+                    + "cinema_id INTEGER,\n"  
+                    + "film_id INTEGER,\n"  
+                    + "prix_prix INTEGER NOT NULL,\n" 
+                    + "CONSTRAINT pk_prix_id_id PRIMARY KEY (cinema_id, film_id),\n"
+                    + "CONSTRAINT fk_prix_cinID FOREIGN KEY (cinema_id) REFERENCES Abonne (cinema_id) ON DELETE CASCADE ON UPDATE CASCADE,\n"
+                    + "CONSTRAINT fk_prix_filmID FOREIGN KEY (film_id) REFERENCES Film(film_id) ON DELETE CASCADE ON UPDATE CASCADE,\n"
+                    + "CONSTRAINT ck_prix_prix CHECK (prix_prix >= 0) \n"
+                    + ");";  
+              
+            try{  
+                Connection conn = DriverManager.getConnection(url);  
+                Statement stmt = conn.createStatement();  
+                stmt.execute(sql); 
+                System.out.println("A new table has been created.");
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage());  
+            }  
+        }
 
         // public static void createNewTableAbonne() {  
         //     // SQLite connection string  
