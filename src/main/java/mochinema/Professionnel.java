@@ -20,7 +20,7 @@ public class Professionnel {
     }
 
     public String getPrenom(){
-        return nom;
+        return prenom;
     }
 
     public Date getDateNaissance(){

@@ -7,6 +7,8 @@ import java.io.IOException;
 import SQL.SelectRecords;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -31,6 +33,8 @@ public class HomeController {
     @FXML
     private ImageView image_test;
 
+    private Parent root;
+
     public Abonne a;
 
     private final Date d = new Date("00/00/0000");
@@ -48,7 +52,16 @@ public class HomeController {
                 alert.setContentText("Vous êtes connecté. \nBonjour " + a.getPrenom() + " " + a.getNom() + " !");
                 alert.setHeaderText(null);
                 alert.showAndWait();
-                App.newScene("main");
+
+
+                FXMLLoader newRoot = new FXMLLoader(App.class.getResource("main.fxml"));
+                root = newRoot.load();
+
+                MainController mainC = newRoot.getController();
+                mainC.setAbonne(a);
+
+                App.newSceneAbonne(root);
+
             }else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Aucun abonnée ne correponds aux données saisis. \nVeuillez vérifier les informations rentrées.");
@@ -68,9 +81,13 @@ public class HomeController {
 
     @FXML
     private void Invite() throws IOException{
-        a = invite;
+        FXMLLoader newRoot = new FXMLLoader(App.class.getResource("main.fxml"));
+        root = newRoot.load();
 
-        App.newScene("main");
+        MainController mainC = newRoot.getController();
+        mainC.setAbonne(invite);
+
+        App.newSceneAbonne(root);
         
     }
 

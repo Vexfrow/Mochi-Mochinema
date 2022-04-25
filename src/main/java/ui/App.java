@@ -16,8 +16,7 @@ public class App extends Application {
 
 
     @Override
-    public void start(Stage stage) throws IOException 
-    {
+    public void start(Stage stage) throws IOException {
         try{
             this.stage = stage;
             Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
@@ -46,6 +45,15 @@ public class App extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.centerOnScreen();
+    }
+    
+
+    static void newSceneAbonne(Parent root) throws IOException {
+        scene = new Scene(root);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.centerOnScreen();
+        stage.show();
     }
 
 }

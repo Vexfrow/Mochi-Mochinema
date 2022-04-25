@@ -38,6 +38,7 @@ import mochinema.Date;
                                        rs.getString("abonne_prenom") + "\t" +  
                                        rs.getString("abonne_nom"));  
                 }  
+                stmt.close();
             } catch (SQLException e) {  
                 System.out.println(e.getMessage());  
             }  
@@ -55,10 +56,12 @@ import mochinema.Date;
                   
                 // loop through the result set  
                 if (!rs.isBeforeFirst()) {  
+                    stmt.close();
                     return null;  
                 } else{
                     Date d = new Date(rs.getString("abonne_date_naissance"));
                     Abonne a = new Abonne(rs.getString("abonne_pseudo"), rs.getString("abonne_nom"), rs.getString("abonne_prenom"), rs.getString("abonne_adresse_mail"), rs.getString("abonne_mot_de_passe"), d);
+                    stmt.close();
                     return a;
                 }
             } catch (SQLException e) {  
@@ -76,8 +79,9 @@ import mochinema.Date;
                 Statement stmt  = conn.createStatement();  
                 ResultSet rs    = stmt.executeQuery(sql);  
                   
-                // loop through the result set  
-                return (rs.isBeforeFirst());
+                boolean b = rs.isBeforeFirst();
+                stmt.close();
+                return b;
             } catch (SQLException e) {  
                 System.out.println(e.getMessage());  
                 return false;
@@ -93,9 +97,10 @@ import mochinema.Date;
                 Connection conn = this.connect();  
                 Statement stmt  = conn.createStatement();  
                 ResultSet rs    = stmt.executeQuery(sql);  
-                  
-                // loop through the result set  
-                return rs.getString("abonne_mot_de_passe");
+                String s = rs.getString("abonne_mot_de_passe");
+                stmt.close();
+                return s;
+
             } catch (SQLException e) {  
                 System.out.println(e.getMessage());  
                 return null;

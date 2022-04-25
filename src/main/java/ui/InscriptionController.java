@@ -6,6 +6,8 @@ import SQL.InsertRecords;
 import SQL.SelectRecords;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
@@ -65,7 +67,13 @@ public class InscriptionController {
                     alert.setHeaderText(null);
                     alert.showAndWait();
 
-                    App.newScene("main");
+                    FXMLLoader newRoot = new FXMLLoader(App.class.getResource("main.fxml"));
+                    Parent root = newRoot.load();
+
+                    MainController mainC = newRoot.getController();
+                    mainC.setAbonne(a);
+
+                    App.newSceneAbonne(root);
                 }
 
             }else{

@@ -1,14 +1,11 @@
 package SQL;
 
 import java.sql.DriverManager;
-    import java.sql.Connection;  
-    import java.sql.ResultSet;  
+    import java.sql.Connection;   
     import java.sql.SQLException;  
     import java.sql.Statement;
 
-import mochinema.Abonne;
-import mochinema.Date;  
-       
+
     public class DeleteRecords {  
        
         private Connection connect() {  
@@ -31,6 +28,7 @@ import mochinema.Date;
                 Connection conn = this.connect();  
                 Statement stmt  = conn.createStatement(); 
                 stmt.executeUpdate(sql);
+                stmt.close();
                 System.out.println("A record has been deleted.");
             
                   
@@ -44,7 +42,7 @@ import mochinema.Date;
        
         public static void main(String[] args) {  
             DeleteRecords app = new DeleteRecords();
-            app.deleteAbonne("Vexfrow");
+            app.deleteAbonne("ez i");
         }  
        
     }  

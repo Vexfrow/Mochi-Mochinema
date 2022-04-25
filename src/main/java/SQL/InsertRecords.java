@@ -33,6 +33,7 @@ import java.sql.Connection;
                 pstmt.setString(5, birthday);  
                 pstmt.setString(6, password);  
                 pstmt.executeUpdate();  
+                pstmt.close();
                 System.out.println("A new record has been inserted.");
 
             } catch (SQLException e) {  
@@ -50,6 +51,7 @@ import java.sql.Connection;
                 pstmt.setString(2, name);
                 pstmt.setString(3, city); 
                 pstmt.executeUpdate();  
+                pstmt.close();
                 System.out.println("A new record has been inserted.");
 
             } catch (SQLException e) {  
@@ -67,6 +69,8 @@ import java.sql.Connection;
                 pstmt.setString(2, surname);
                 pstmt.setString(3, birthday);  
                 pstmt.executeUpdate();  
+
+                pstmt.close();
                 System.out.println("A new record has been inserted.");
 
             } catch (SQLException e) {  
@@ -85,6 +89,8 @@ import java.sql.Connection;
                 pstmt.setString(2, title);
                 pstmt.setString(3, releaseDate);   
                 pstmt.executeUpdate();  
+
+                pstmt.close();
                 System.out.println("A new record has been inserted.");
 
             } catch (SQLException e) {  
@@ -106,6 +112,8 @@ import java.sql.Connection;
                 pstmt.setInt(4, filmId);
                 pstmt.setString(5, job);   
                 pstmt.executeUpdate();  
+
+                pstmt.close();
                 System.out.println("A new record has been inserted.");
 
             } catch (SQLException e) {  

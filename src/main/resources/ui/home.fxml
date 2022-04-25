@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -10,8 +11,8 @@
       <Button fx:id="button_connexion" layoutX="415.0" layoutY="332.0" mnemonicParsing="false" onAction="#Confirmer" prefHeight="0.0" prefWidth="158.0" text="Se connecter" />
       <Button fx:id="button_inscription" layoutX="32.0" layoutY="332.0" mnemonicParsing="false" onAction="#Inscription" prefHeight="13.0" prefWidth="158.0" text="S'inscrire" />
       <Button fx:id="button_invite" layoutX="227.0" layoutY="332.0" mnemonicParsing="false" onAction="#Invite" prefHeight="25.0" prefWidth="158.0" text="Continuer en tant qu'invité" />
-      <TextField fx:id="text_mdp" layoutX="415.0" layoutY="200.0" prefHeight="26.0" prefWidth="158.0" promptText="Mot de passe" />
       <ImageView fx:id="image_test" fitHeight="140.0" fitWidth="336.0" layoutX="32.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="text_pseudo" layoutX="415.0" layoutY="121.0" prefHeight="26.0" prefWidth="158.0" promptText="Pseudo" />
+      <PasswordField fx:id="text_mdp" layoutX="418.0" layoutY="200.0" promptText="Mot de passe" />
    </children>
 </Pane>
