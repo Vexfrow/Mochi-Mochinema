@@ -12,11 +12,9 @@ public class Connect {
 	public static void connect() {
 		Connection conn = null;
 		try {
-			// db parameters
-			String url = "jdbc:sqlite:C:/sqlite/Mochi-Mochinéma.db";
-			// create a connection to the database
-			conn = DriverManager.getConnection(url);
 
+			String url = Create.urlDatabase;
+			conn = DriverManager.getConnection(url);
 			System.out.println("Connection to SQLite has been established.");
 
 		} catch (SQLException e) {

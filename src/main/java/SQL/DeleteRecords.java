@@ -9,8 +9,7 @@ import java.sql.DriverManager;
     public class DeleteRecords {  
        
         private Connection connect() {  
-            // SQLite connection string  
-            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
+            String url =  Create.urlDatabase;  
             Connection conn = null;  
             try {  
                 conn = DriverManager.getConnection(url);  

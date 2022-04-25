@@ -6,11 +6,11 @@ import java.sql.Connection;
     import java.sql.Statement;  
        
     public class CreateTable {  
+
+        private static String url =  Create.urlDatabase;
+
        
-        public static void createNewTableCinema() {  
-            // SQLite connection string  
-            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
-              
+        public static void createNewTableCinema() {                
             // SQL statement for creating a new table  
             String sql = "CREATE TABLE IF NOT EXISTS cinema (\n"  
                     + " cinema_id integer PRIMARY KEY,\n"  
@@ -31,9 +31,6 @@ import java.sql.Connection;
 
 
         public static void createNewTableProfessionel() {  
-            // SQLite connection string  
-            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
-              
             // SQL statement for creating a new table  
             String sql = "CREATE TABLE IF NOT EXISTS professionel (\n"  
                     + " professionel_nom text,\n"  
@@ -54,10 +51,7 @@ import java.sql.Connection;
 
 
 
-        public static void createNewTableFilm(){  
-            // SQLite connection string  
-            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
-              
+        public static void createNewTableFilm(){              
             // SQL statement for creating a new table  
             String sql = "CREATE TABLE IF NOT EXISTS film (\n"  
                     + " film_id integer PRIMARY KEY,\n"  
@@ -78,10 +72,7 @@ import java.sql.Connection;
 
 
 
-        public static void createNewTableParticipant(){  
-            // SQLite connection string  
-            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
-              
+        public static void createNewTableParticipant(){                
             // SQL statement for creating a new table  
             String sql = "CREATE TABLE IF NOT EXISTS participant (\n"  
                     + " professionel_nom text,\n"  
@@ -102,16 +93,14 @@ import java.sql.Connection;
                 Statement stmt = conn.createStatement();  
                 stmt.execute(sql); 
                 System.out.println("A new table has been created.");
+
             } catch (SQLException e) {  
                 System.out.println(e.getMessage());  
             }  
         } 
 
 
-        public static void createNewTableAbonne() {  
-            // SQLite connection string  
-            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
-              
+        public static void createNewTableAbonne() {              
             // SQL statement for creating a new table  
             String sql = "CREATE TABLE IF NOT EXISTS Abonne (\n"  
                     + "abonne_pseudo TEXT PRIMARY KEY,\n"  
@@ -132,10 +121,7 @@ import java.sql.Connection;
             }  
         } 
 
-        public static void createNewTableCritique() {  
-            // SQLite connection string  
-            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
-              
+        public static void createNewTableCritique() {              
             // SQL statement for creating a new table  
             String sql = "CREATE TABLE IF NOT EXISTS Critique (\n"  
                     + "abonne_pseudo TEXT,\n"  
@@ -159,10 +145,8 @@ import java.sql.Connection;
             }  
         }
 
-        public static void createNewTablePrix() {  
-            // SQLite connection string  
-            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
-              
+
+        public static void createNewTablePrix() {              
             // SQL statement for creating a new table  
             String sql = "CREATE TABLE IF NOT EXISTS Prix (\n"  
                     + "cinema_id INTEGER,\n"  
@@ -184,27 +168,6 @@ import java.sql.Connection;
             }  
         }
 
-        // public static void createNewTableAbonne() {  
-        //     // SQLite connection string  
-        //     String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
-              
-        //     // SQL statement for creating a new table  
-        //     String sql = "CREATE TABLE IF NOT EXISTS cinema (\n"  
-        //             + " cinema_id integer PRIMARY KEY,\n"  
-        //             + " cinema_nom text NOT NULL,\n"  
-        //             + " cinema_ville text NOT NULL,\n"  
-        //             + " CONSTRAINT ck_cinema_id CHECK (cinema_id >= 0)\n"
-        //             + " );";  
-              
-        //     try{  
-        //         Connection conn = DriverManager.getConnection(url);  
-        //         Statement stmt = conn.createStatement();  
-        //         stmt.execute(sql); 
-        //         System.out.println("A new table has been created.");
-        //     } catch (SQLException e) {  
-        //         System.out.println(e.getMessage());  
-        //     }  
-        // }  
        
         /** 
          * @param args the command line arguments 
@@ -214,6 +177,9 @@ import java.sql.Connection;
             createNewTableProfessionel();
             createNewTableFilm();
             createNewTableParticipant();
+            createNewTableAbonne();
+            createNewTableCritique();
+            createNewTablePrix();
         }  
        
     }  

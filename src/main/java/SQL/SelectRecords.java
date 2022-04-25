@@ -13,7 +13,7 @@ import mochinema.Date;
        
         private Connection connect() {  
             // SQLite connection string  
-            String url = "jdbc:sqlite:C://sqlite/Mochi-Mochinéma.db";  
+            String url =  Create.urlDatabase;  
             Connection conn = null;  
             try {  
                 conn = DriverManager.getConnection(url);  
@@ -46,8 +46,8 @@ import mochinema.Date;
 
 
 
-        public Abonne selectAbonneSpecifique(String pseudo, String mdp){  
-            String sql = "SELECT * FROM abonne \n WHERE abonne_pseudo = '"+pseudo+"' AND abonne_mot_de_passe = '"+mdp+"';";  
+        public Abonne selectAbonneSpecifique(String pseudo, String motDePasse){  
+            String sql = "SELECT * FROM abonne \n WHERE abonne_pseudo = '"+pseudo+"' AND abonne_mot_passe = '"+motDePasse+"';";  
               
             try {  
                 Connection conn = this.connect();  
@@ -60,7 +60,7 @@ import mochinema.Date;
                     return null;  
                 } else{
                     Date d = new Date(rs.getString("abonne_date_naissance"));
-                    Abonne a = new Abonne(rs.getString("abonne_pseudo"), rs.getString("abonne_nom"), rs.getString("abonne_prenom"), rs.getString("abonne_adresse_mail"), rs.getString("abonne_mot_de_passe"), d);
+                    Abonne a = new Abonne(rs.getString("abonne_pseudo"), rs.getString("abonne_nom"), rs.getString("abonne_prenom"), rs.getString("abonne_adresse_mail"), rs.getString("abonne_mot_passe"), d);
                     stmt.close();
                     return a;
                 }
@@ -71,8 +71,8 @@ import mochinema.Date;
         }  
 
 
-        public boolean abonneExist(String pseudo){  
-            String sql = "SELECT * FROM abonne \n WHERE abonne_pseudo = '"+pseudo+"' ;";  
+        public boolean connection(String pseudo, String motDePasse){  
+            String sql = "SELECT * FROM abonne \n WHERE abonne_pseudo = '"+pseudo+"' AND abonne_mot_passe = '"+motDePasse+"';";  
               
             try {  
                 Connection conn = this.connect();  
@@ -97,7 +97,7 @@ import mochinema.Date;
                 Connection conn = this.connect();  
                 Statement stmt  = conn.createStatement();  
                 ResultSet rs    = stmt.executeQuery(sql);  
-                String s = rs.getString("abonne_mot_de_passe");
+                String s = rs.getString("abonne_mot_passe");
                 stmt.close();
                 return s;
 

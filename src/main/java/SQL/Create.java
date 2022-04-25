@@ -6,17 +6,18 @@ import java.sql.Connection;
     import java.sql.SQLException;  
        
     public class Create {  
+
+        public static String urlDatabase = "jdbc:sqlite:./Mochi-Mochinéma.db";
       
-        public static void createNewDatabase(String fileName) {  
-       
-            String url = "jdbc:sqlite:C:/sqlite/" + fileName;  
-       
+        public static void createNewDatabase() {  
+            
             try {  
-                Connection conn = DriverManager.getConnection(url);  
+                Connection conn = DriverManager.getConnection(urlDatabase);  
                 if (conn != null) {  
                     DatabaseMetaData meta = conn.getMetaData();  
                     System.out.println("The driver name is " + meta.getDriverName());  
                     System.out.println("A new database has been created.");  
+                    System.out.println("URL = " + meta.getURL());  
                 }  
        
             } catch (SQLException e) {  
@@ -25,6 +26,6 @@ import java.sql.Connection;
         }  
       
         public static void main(String[] args) {  
-            createNewDatabase("Mochi-Mochinéma.db");  
+            createNewDatabase();  
         }  
     }  
