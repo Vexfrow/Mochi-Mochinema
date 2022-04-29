@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -18,7 +17,6 @@
       <Line endX="-69.99998474121094" endY="54.70001220703125" layoutX="70.0" startX="530.0" startY="54.70000457763672" />
       <Button fx:id="button_edit" layoutX="290.0" layoutY="14.0" mnemonicParsing="false" onAction="#modifierAccount" prefHeight="25.0" prefWidth="138.0" text="Modifier votre profil" />
       <Button fx:id="button_critics" layoutX="125.0" layoutY="14.0" mnemonicParsing="false" onAction="#showCritique" prefHeight="25.0" prefWidth="138.0" text="Vos critiques" />
-      <Pane fx:id="pane_second" layoutX="17.0" layoutY="117.0" prefHeight="269.0" prefWidth="567.0">
-      </Pane>
+      <Pane fx:id="pane_second" layoutX="17.0" layoutY="117.0" prefHeight="269.0" prefWidth="567.0" />
    </children>
 </Pane>

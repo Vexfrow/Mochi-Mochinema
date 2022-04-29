@@ -7,7 +7,8 @@ import java.sql.DriverManager;
     import java.sql.Statement;
 
 import mochinema.Abonne;
-import mochinema.Date;  
+import mochinema.Date;
+import mochinema.Film;  
        
     public class SelectRecords {  
        
@@ -44,6 +45,38 @@ import mochinema.Date;
             }  
         }  
 
+        public Film[] selectAllFilm(){  
+            String sql = "SELECT * FROM film";  
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sql);  
+                int posTabFilm = 0;
+                  
+                // loop through the result set  
+                while (rs.next()) {  
+                    posTabFilm++;
+                }  
+
+                rs    = stmt.executeQuery(sql);  
+                Film[] tabFilm = new Film[posTabFilm];
+                // loop through the result set  
+                while (rs.next()) {  
+                    Date d = new Date(rs.getString("film_annee_production"));
+                    tabFilm[posTabFilm] = new Film(rs.getInt("film_id"), rs.getString("film_titre"), d);
+                    posTabFilm++;
+                }  
+
+
+                stmt.close();
+                return tabFilm;
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage()); 
+                return null;
+            }  
+        } 
+
 
 
         public Abonne selectAbonneSpecifique(String pseudo, String motDePasse){  
@@ -58,7 +91,7 @@ import mochinema.Date;
                 Abonne a = new Abonne(rs.getString("abonne_pseudo"), rs.getString("abonne_nom"), rs.getString("abonne_prenom"), rs.getString("abonne_adresse_mail"), rs.getString("abonne_mot_passe"), d);
                 stmt.close();
                 return a;
-                
+
             } catch (SQLException e) {  
                 System.out.println(e.getMessage());  
                 return null;

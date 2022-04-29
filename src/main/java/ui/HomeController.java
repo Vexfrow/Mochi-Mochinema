@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import SQL.InsertRecords;
 import SQL.SelectRecords;
 
 import javafx.fxml.FXML;
@@ -16,7 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import mochinema.Abonne;
-import mochinema.Date;
 
 
 /*
@@ -37,11 +35,6 @@ public class HomeController {
     private Parent root;
 
     public Abonne a;
-
-
-    //Abonne par défaut si l'utilisateur ne se connecte pas/ne crée pas de compte
-    private final Date d = new Date("00/00/0000");
-    private final Abonne invite = new Abonne("Invite", "Invite","Invite","Invite", "Invite", d);
 
 
     @FXML
@@ -99,16 +92,15 @@ public class HomeController {
         FXMLLoader newRoot = new FXMLLoader(App.class.getResource("main.fxml")); 
         root = newRoot.load();
         MainController mainC = newRoot.getController();
-        mainC.setAbonne(invite);
+        SelectRecords sr = new SelectRecords();
+        a = sr.selectAbonneSpecifique("Invite","Invite");
+        mainC.setAbonne(a);
         App.newSceneAbonne(root);
         
     }
 
     @FXML
     private void initialize() throws FileNotFoundException{
-        InsertRecords ir = new InsertRecords();
-        ir.insertAbonne(invite.getPseudo(), invite.getNom(), invite.getPrenom(), invite.getMail(), invite.getDateNaissance().toString(), invite.getMDP());
-
         Image image = new Image(new FileInputStream("./src/main/resources/image/test.png"));
         image_test.setImage(image);
         

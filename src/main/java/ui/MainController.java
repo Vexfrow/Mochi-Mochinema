@@ -2,12 +2,14 @@ package ui;
 
 import java.io.IOException;
 
+import SQL.SelectRecords;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import mochinema.Abonne;
+import mochinema.Film;
 
 public class MainController {
 
@@ -21,6 +23,8 @@ public class MainController {
 
     public Abonne abonne;
 
+    private Film[] tabFilm;
+
 
     @FXML
     private void Profil() throws IOException{
@@ -31,6 +35,13 @@ public class MainController {
         profilC.setAbonne(abonne);
 
         App.newSceneAbonne(root);
+    }
+
+    @FXML
+    private void initialize(){
+        SelectRecords sr = new SelectRecords();
+        tabFilm = sr.selectAllFilm();
+        
     }
 
 

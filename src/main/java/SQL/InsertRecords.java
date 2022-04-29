@@ -131,6 +131,9 @@ import java.sql.Connection;
                 app.insertCinema(1, "Les 7 nefs", "Montelimar");
 
                 app.insertFilm(1, "Ocean Eleven", "2001");
+                app.insertFilm(2, "Moi Moche et Méchant", "2010");
+                app.insertFilm(3, "Kaamelott", "2021");
+                app.insertFilm(4, "Pacific Rim", "2013");
 
                 app.insertParticipant("George", "Clooney", "06/05/1961", 1, "realisateur");
 
