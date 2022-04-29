@@ -129,13 +129,33 @@ import java.sql.Connection;
                 app.insertAbonne("Invite", "Invite", "Invite", "Invite", "00/00/0000", "Invite");
 
                 app.insertCinema(1, "Les 7 nefs", "Montelimar");
-
+                app.insertCinema(2, "Pathe", "Valence");
+   
                 app.insertFilm(1, "Ocean Eleven", "2001");
                 app.insertFilm(2, "Moi Moche et Méchant", "2010");
                 app.insertFilm(3, "Kaamelott", "2021");
                 app.insertFilm(4, "Pacific Rim", "2013");
+                app.insertFilm(5, "Pacific Rim : Uprising", "2018");
+                app.insertFilm(6, "Moi Moche et Méchant 2", "2013");
+                app.insertFilm(7, "Moi Moche et Méchant 3", "2017");
 
-                app.insertParticipant("George", "Clooney", "06/05/1961", 1, "realisateur");
+                app.insertProfessionel("Clooney", "George", "06/05/1961");
+                app.insertProfessionel("Carell", "Steve", "16/08/1962");
+                app.insertProfessionel("Coffin", "Pierre", "01/11/1967");
+                app.insertProfessionel("Astier", "Alexandre", "01/11/1967");
+                app.insertProfessionel("Del Toro", "Guillermo", "09/08/1964");
+
+                app.insertParticipant("Clooney", "George", "06/05/1961", 1, "realisateur");
+                app.insertParticipant("Carell", "Steve", "16/08/1962", 2, "doubleur");
+                app.insertParticipant("Carell", "Steve", "16/08/1962", 6, "doubleur");
+                app.insertParticipant("Carell", "Steve", "16/08/1962", 7, "doubleur");
+                app.insertParticipant("Coffin", "Pierre", "01/11/1967", 2, "doubleur");
+                app.insertParticipant("Astier", "Alexandre", "01/11/1967", 3, "realisateur");
+                app.insertParticipant("Astier", "Alexandre", "01/11/1967", 3, "acteur");
+                app.insertParticipant("Del Toro", "Guillermo", "09/08/1964", 4, "réalisateur");
+
+
+
 
 
             }catch(Exception e){
