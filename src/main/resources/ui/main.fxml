@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainController">
    <children>
       <Button fx:id="button_profil" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#Profil" text="Profil" />
       <Text fx:id="text_test" layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bonjour " wrappingWidth="154.4000244140625" />
-      <GridPane layoutX="14.0" layoutY="53.0" prefHeight="331.0" prefWidth="559.0">
+      <GridPane fx:id="gp_main" layoutX="14.0" layoutY="53.0" prefHeight="331.0" prefWidth="559.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

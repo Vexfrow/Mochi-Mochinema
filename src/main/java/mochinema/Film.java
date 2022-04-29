@@ -4,13 +4,13 @@ public class Film {
 
     private int ID;
     private String titre;
-    private Date dateProduction;
+    private int anneeProduction;
 
 
-    public Film(int ID, String titre, Date dateProduction){
+    public Film(int ID, String titre, int anneeProduction){
         this.ID = ID;
         this.titre = titre;
-        this.dateProduction = dateProduction;
+        this.anneeProduction = anneeProduction;
     }
 
 
@@ -23,8 +23,8 @@ public class Film {
         return titre;
     }
 
-    public Date getDateProduction(){
-        return dateProduction;
+    public int getDateProduction(){
+        return anneeProduction;
     }
     
 }

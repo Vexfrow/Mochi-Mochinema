@@ -43,8 +43,8 @@ public class App extends Application {
         //Si elle n'existe pas, on la crée ainsi que les tables, et on insère les données de base
         try{
             Create.main(null);
-            CreateTable.main(null);
-            InsertRecords.main(null);
+            // CreateTable.main(null);
+            // InsertRecords.main(null);
 
         }catch (Exception e){
             System.out.println("La base de donnée existe déjà");

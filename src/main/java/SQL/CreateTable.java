@@ -102,7 +102,7 @@ import java.sql.Connection;
 
         public static void createNewTableAbonne() {              
             // SQL statement for creating a new table  
-            String sql = "CREATE TABLE IF NOT EXISTS Abonne (\n"  
+            String sql = "CREATE TABLE IF NOT EXISTS abonne (\n"  
                     + "abonne_pseudo TEXT PRIMARY KEY,\n"  
                     + "abonne_nom TEXT NOT NULL,\n"  
                     + "abonne_prenom TEXT NOT NULL,\n"
@@ -124,7 +124,7 @@ import java.sql.Connection;
         
         public static void createNewTableCritique() {              
             // SQL statement for creating a new table  
-            String sql = "CREATE TABLE IF NOT EXISTS Critique (\n"  
+            String sql = "CREATE TABLE IF NOT EXISTS critique (\n"  
                     + "abonne_pseudo TEXT,\n"  
                     + "film_id INTEGER,\n"  
                     + "critique_critique VARCHAR(240) NOT NULL,\n"
@@ -149,7 +149,7 @@ import java.sql.Connection;
 
         public static void createNewTablePrix() {              
             // SQL statement for creating a new table  
-            String sql = "CREATE TABLE IF NOT EXISTS Prix (\n"  
+            String sql = "CREATE TABLE IF NOT EXISTS prix (\n"  
                     + "cinema_id INTEGER,\n"  
                     + "film_id INTEGER,\n"  
                     + "prix_prix INTEGER NOT NULL,\n" 

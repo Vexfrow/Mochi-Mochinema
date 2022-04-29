@@ -59,15 +59,14 @@ import mochinema.Film;
                     posTabFilm++;
                 }  
 
-                rs    = stmt.executeQuery(sql);  
+                rs = stmt.executeQuery(sql);  
                 Film[] tabFilm = new Film[posTabFilm];
+                int i = 0;
                 // loop through the result set  
                 while (rs.next()) {  
-                    Date d = new Date(rs.getString("film_annee_production"));
-                    tabFilm[posTabFilm] = new Film(rs.getInt("film_id"), rs.getString("film_titre"), d);
-                    posTabFilm++;
+                    tabFilm[i] = new Film(rs.getInt("film_id"), rs.getString("film_titre"), rs.getInt("film_annee_production"));
+                    i++;
                 }  
-
 
                 stmt.close();
                 return tabFilm;
@@ -97,6 +96,24 @@ import mochinema.Film;
                 return null;
             }  
         }  
+
+
+        public Film selectFilm(String titre){  
+            String sql = "SELECT * FROM film \n WHERE film_titre = '"+titre+"';";  
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sql);  
+                Film f = new Film(rs.getInt("film_id"), rs.getString("film_titre"), rs.getInt("film_annee_production"));
+                stmt.close();
+                return f;
+
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage());  
+                return null;
+            }  
+        } 
 
 
         //Fait une demande SQL afin de vérifier que 
@@ -147,7 +164,7 @@ import mochinema.Film;
         public static void main(String[] args) {  
             SelectRecords app = new SelectRecords();  
             // app.selectAll();  
-            app.selectAllAbonne();
+            app.selectAllFilm();
         }  
        
     }  

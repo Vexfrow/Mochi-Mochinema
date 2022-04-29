@@ -135,17 +135,13 @@ public class ProfilController {
             
                     //Si la réponse est oui
                     if(ButtonType.YES.equals(result)){
-                        try{
-                            UpgradeRecords ur = new UpgradeRecords();
-                            ur.upgradeAbonne(abonne.getPseudo(), text_prenom.getText(), text_mail.getText(), text_nom.getText());
+                        UpgradeRecords ur = new UpgradeRecords();
+                        ur.upgradeAbonne(abonne.getPseudo(), text_prenom.getText(), text_mail.getText(), text_nom.getText());
 
-                            Alert alert1 = new Alert(Alert.AlertType.INFORMATION); 
-                            alert1.setContentText("Vos informations ont bien été modifiés !");
-                            alert1.setHeaderText(null);
-                            alert1.showAndWait();
-                        }catch(Exception error){
-                            System.out.println("Errrororororororororororroroor");
-                        }
+                        Alert alert1 = new Alert(Alert.AlertType.INFORMATION); 
+                        alert1.setContentText("Vos informations ont bien été modifiés !");
+                        alert1.setHeaderText(null);
+                        alert1.showAndWait();
                     }
                 }
             }
@@ -187,17 +183,13 @@ public class ProfilController {
             
                     //Si la réponse est oui
                     if(ButtonType.YES.equals(result)){
-                        try{
-                            UpgradeRecords ur = new UpgradeRecords();
-                            ur.upgradeAbonneMdp(abonne.getPseudo(), mdpField_new1.getText());
+                        UpgradeRecords ur = new UpgradeRecords();
+                        ur.upgradeAbonneMdp(abonne.getPseudo(), mdpField_new1.getText());
                             
-                            Alert alert1 = new Alert(Alert.AlertType.INFORMATION); 
-                            alert1.setContentText("Votre mot de passe à bien été modifiés !");
-                            alert1.setHeaderText(null);
-                            alert1.showAndWait();
-                        }catch(Exception error){
-                            System.out.println("Errrororororororororororroroor");
-                        }
+                        Alert alert1 = new Alert(Alert.AlertType.INFORMATION); 
+                        alert1.setContentText("Votre mot de passe à bien été modifiés !");
+                        alert1.setHeaderText(null);
+                        alert1.showAndWait();
                     }
                 }else{
                     Alert alert1 = new Alert(Alert.AlertType.ERROR); 

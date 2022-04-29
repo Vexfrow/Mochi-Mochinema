@@ -151,8 +151,7 @@ import java.sql.Connection;
                 app.insertParticipant("Carell", "Steve", "16/08/1962", 7, "doubleur");
                 app.insertParticipant("Coffin", "Pierre", "01/11/1967", 2, "doubleur");
                 app.insertParticipant("Astier", "Alexandre", "01/11/1967", 3, "realisateur");
-                app.insertParticipant("Astier", "Alexandre", "01/11/1967", 3, "acteur");
-                app.insertParticipant("Del Toro", "Guillermo", "09/08/1964", 4, "réalisateur");
+                app.insertParticipant("Del Toro", "Guillermo", "09/08/1964", 4, "realisateur");
 
 
 
