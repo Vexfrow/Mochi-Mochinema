@@ -53,4 +53,9 @@ public class Date {
     }
 
 
+    public String toString(){
+        String t = "" + jour + '/'+mois +'/'+annee;
+        return t;
+    }
+
 }

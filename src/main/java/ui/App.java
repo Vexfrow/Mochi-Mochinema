@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import SQL.Create;
+import SQL.CreateTable;
+import SQL.InsertRecords;
+
 
 public class App extends Application {
 
@@ -35,6 +39,17 @@ public class App extends Application {
 
 
     public static void main(String[] args) {
+        //On regarde si la base de donnée existe déjà ou pas
+        //Si elle n'existe pas, on la crée ainsi que les tables, et on insère les données de base
+        try{
+            Create.main(null);
+            CreateTable.main(null);
+            InsertRecords.main(null);
+
+        }catch (Exception e){
+            System.out.println("La base de donnée existe déjà");
+        }
+
         launch();
     }
 

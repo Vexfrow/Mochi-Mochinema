@@ -4,9 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import SQL.Connect;
-import SQL.Create;
-import SQL.CreateTable;
 import SQL.InsertRecords;
 import SQL.SelectRecords;
 
@@ -56,8 +53,7 @@ public class HomeController {
             SelectRecords sr = new SelectRecords();
 
             //On vérifie si les informations correspondent à un utilisateur
-            if(sr.connection(text_pseudo.getText(), text_mdp.getText())){
-
+            try{
                 //On récupère les autres informations de l'abonné
                 a = sr.selectAbonneSpecifique(text_pseudo.getText(), text_mdp.getText()); 
 
@@ -74,7 +70,7 @@ public class HomeController {
                 mainC.setAbonne(a);
                 App.newSceneAbonne(root);
 
-            }else{ //Si les informations ne correspondent à aucun abonné
+            }catch(Exception e){ //Si les informations ne correspondent à aucun abonné (ie, qu'on a aucun abonné qui correspondent aux données dans la base de donnée)
 
                 //Un message informatif apparaît pour dire qu'aucun abonné ne correspond aux données rentrées
                 Alert alert = new Alert(Alert.AlertType.ERROR); 
@@ -110,17 +106,8 @@ public class HomeController {
 
     @FXML
     private void initialize() throws FileNotFoundException{
-
-        //On regarde si la base de donnée existe déjà ou pas
-        //Si elle n'existe pas, on la crée ainsi que les tables, et on insère les données de base
-        try{
-            Connect.connect();
-
-        }catch (Exception e){
-            Create.main(null);
-            CreateTable.main(null);
-            InsertRecords.main(null);
-        }
+        InsertRecords ir = new InsertRecords();
+        ir.insertAbonne(invite.getPseudo(), invite.getNom(), invite.getPrenom(), invite.getMail(), invite.getDateNaissance().toString(), invite.getMDP());
 
         Image image = new Image(new FileInputStream("./src/main/resources/image/test.png"));
         image_test.setImage(image);

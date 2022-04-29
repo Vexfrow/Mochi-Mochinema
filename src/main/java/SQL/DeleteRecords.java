@@ -28,7 +28,7 @@ import java.sql.DriverManager;
                 Statement stmt  = conn.createStatement(); 
                 stmt.executeUpdate(sql);
                 stmt.close();
-                System.out.println("A record has been deleted.");
+                System.out.println("Un abonné a été supprimé.");
             
                   
             } catch (SQLException e) {  
@@ -39,9 +39,7 @@ import java.sql.DriverManager;
 
 
        
-        public static void main(String[] args) {  
-            DeleteRecords app = new DeleteRecords();
-            app.deleteAbonne("ez i");
+        public static void main(String[] args) { 
         }  
        
     }  

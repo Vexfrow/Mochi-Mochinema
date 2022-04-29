@@ -121,6 +121,7 @@ import java.sql.Connection;
             }  
         } 
 
+        
         public static void createNewTableCritique() {              
             // SQL statement for creating a new table  
             String sql = "CREATE TABLE IF NOT EXISTS Critique (\n"  

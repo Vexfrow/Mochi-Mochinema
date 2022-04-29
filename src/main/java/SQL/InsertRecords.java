@@ -122,36 +122,30 @@ import java.sql.Connection;
         }  
 
 
+        public static void insertDonneeStart(){
+            InsertRecords app = new InsertRecords();  
+            
+            try{
+                app.insertAbonne("Invite", "Invite", "Invite", "Invite", "00/00/0000", "Invite");
 
-        // public void insertAbonne(String pseudo, String name, String surname, String mail, String birthday, String password) {  
-        //     String sql = "INSERT INTO abonne(abonne_pseudo, abonne_nom, abonne_prenom, abonne_adresse_mail, abonne_date_naissance, abonne_mot_de_passe) VALUES(?,?,?,?,?,?)";  
-       
-        //     try{  
-        //         Connection conn = this.connect();  
-        //         PreparedStatement pstmt = conn.prepareStatement(sql);  
-        //         pstmt.setString(1, pseudo);  
-        //         pstmt.setString(2, name);
-        //         pstmt.setString(3, surname);  
-        //         pstmt.setString(4, mail);
-        //         pstmt.setString(5, birthday);  
-        //         pstmt.setString(6, password);  
-        //         pstmt.executeUpdate();  
-        //         System.out.println("A new record has been inserted.");
+                app.insertCinema(1, "Les 7 nefs", "Montelimar");
 
-        //     } catch (SQLException e) {  
-        //         System.out.println(e.getMessage());  
-        //     }  
-        // }  
+                app.insertFilm(1, "Ocean Eleven", "2001");
+
+                app.insertParticipant("George", "Clooney", "06/05/1961", 1, "realisateur");
+
+
+            }catch(Exception e){
+                System.out.println("Ah Zut, c'est enquiquinant tout de même");
+
+            }
+
+        }
+
+
        
         public static void main(String[] args) {  
-       
-            InsertRecords app = new InsertRecords();   
-            app.insertAbonne("JIJI","Jean", "David", "Jean.david@gmail.com", "09/12/1982", "JIJI82");  
-            app.insertCinema(1, "Les 7 nefs", "Montelimar");
-            app.insertProfessionel("George", "Cooney", "06/05/1961");
-            app.insertFilm(1, "Ocean Eleven", "2001");
-            app.insertParticipant("George", "Clooney", "06/05/1961", 1, "realisateur");
-            app.insertParticipant("George", "Cooney", "06/05/1961", 1, "realisateur");
+            insertDonneeStart();
         }  
        
     }  

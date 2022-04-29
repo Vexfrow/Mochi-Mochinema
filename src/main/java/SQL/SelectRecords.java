@@ -53,17 +53,12 @@ import mochinema.Date;
                 Connection conn = this.connect();  
                 Statement stmt  = conn.createStatement();  
                 ResultSet rs    = stmt.executeQuery(sql);  
-                  
-                // loop through the result set  
-                if (!rs.isBeforeFirst()) {  
-                    stmt.close();
-                    return null;  
-                } else{
-                    Date d = new Date(rs.getString("abonne_date_naissance"));
-                    Abonne a = new Abonne(rs.getString("abonne_pseudo"), rs.getString("abonne_nom"), rs.getString("abonne_prenom"), rs.getString("abonne_adresse_mail"), rs.getString("abonne_mot_passe"), d);
-                    stmt.close();
-                    return a;
-                }
+
+                Date d = new Date(rs.getString("abonne_date_naissance"));
+                Abonne a = new Abonne(rs.getString("abonne_pseudo"), rs.getString("abonne_nom"), rs.getString("abonne_prenom"), rs.getString("abonne_adresse_mail"), rs.getString("abonne_mot_passe"), d);
+                stmt.close();
+                return a;
+                
             } catch (SQLException e) {  
                 System.out.println(e.getMessage());  
                 return null;
@@ -71,6 +66,7 @@ import mochinema.Date;
         }  
 
 
+        //Fait une demande SQL afin de vérifier que 
         public boolean connection(String pseudo, String motDePasse){  
             String sql = "SELECT * FROM abonne \n WHERE abonne_pseudo = '"+pseudo+"' AND abonne_mot_passe = '"+motDePasse+"';";  
               
