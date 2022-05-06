@@ -4,16 +4,16 @@ public class Critique {
 
 
     private String pseudo;
-    private String titreFilm;
+    private int idFilm;
     private String critique;
     private float note;
 
 
 
-    public Critique(String pseudo, String titreFilm, String critique, float note){
+    public Critique(String pseudo, int idFilm, String critique, float note){
 
         this.pseudo = pseudo;
-        this.titreFilm = titreFilm;
+        this.idFilm = idFilm;
         this.critique = critique;
         this.note = note;
     }
@@ -22,8 +22,8 @@ public class Critique {
         return this.pseudo;
     }
 
-    public String getFilm(){
-        return this.titreFilm;
+    public int getFilm(){
+        return this.idFilm;
     }
 
     public String getCritique(){

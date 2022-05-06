@@ -60,7 +60,7 @@ public class HomeController {
                 FXMLLoader newRoot = new FXMLLoader(App.class.getResource("main.fxml"));
                 root = newRoot.load();
                 MainController mainC = newRoot.getController();
-                mainC.setAbonne(a);
+                mainC.setAbonne(a.getPseudo());
                 App.newSceneAbonne(root);
 
             }catch(Exception e){ //Si les informations ne correspondent à aucun abonné (ie, qu'on a aucun abonné qui correspondent aux données dans la base de donnée)
@@ -94,7 +94,7 @@ public class HomeController {
         MainController mainC = newRoot.getController();
         SelectRecords sr = new SelectRecords();
         a = sr.selectAbonneSpecifique("Invite","Invite");
-        mainC.setAbonne(a);
+        mainC.setAbonne(a.getPseudo());
         App.newSceneAbonne(root);
         
     }

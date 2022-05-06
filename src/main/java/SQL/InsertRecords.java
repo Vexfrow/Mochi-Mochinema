@@ -121,6 +121,26 @@ import java.sql.Connection;
             }  
         }  
 
+        public void insertCritique(String pseudo, int filmID, String critique, int note) {
+            String sql = "INSERT INTO critique(abonne_pseudo,film_id, critique_critique, critique_note) VALUES(?,?,?,?)";
+
+            try{
+                Connection conn = this.connect();
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, pseudo);
+                pstmt.setInt(2, filmID);
+                pstmt.setString(3, critique);
+                pstmt.setFloat(4, note); 
+                pstmt.executeUpdate();
+
+                pstmt.close();
+                System.out.println("A new record has been inserted.");
+
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
 
         public static void insertDonneeStart(){
             InsertRecords app = new InsertRecords();  
@@ -157,7 +177,8 @@ import java.sql.Connection;
 
                 app.insertCritique("Kekw12", 1, "J'adore trop. Tout est trop bien. Le son, les braquages c'est ouf", 9);
                 app.insertCritique("CommeTuVeut", 1, "Meilleur film ever", 9);
-                app.insertCritique("Kekw12", 2, "Trop drole Gru");
+                app.insertCritique("Invite", 1, "Nul", 0);
+                app.insertCritique("Kekw12", 2, "Trop drole Gru", 8);
 
 
 

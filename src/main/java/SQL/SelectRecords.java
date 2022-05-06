@@ -1,12 +1,13 @@
 package SQL;
 
 import java.sql.DriverManager;
-    import java.sql.Connection;  
-    import java.sql.ResultSet;  
-    import java.sql.SQLException;  
-    import java.sql.Statement;
+import java.sql.Connection;  
+import java.sql.ResultSet;  
+import java.sql.SQLException;  
+import java.sql.Statement;
 
 import mochinema.Abonne;
+import mochinema.Critique;
 import mochinema.Date;
 import mochinema.Film;  
        
@@ -44,6 +45,7 @@ import mochinema.Film;
                 System.out.println(e.getMessage());  
             }  
         }  
+
 
         public Film[] selectAllFilm(){  
             String sql = "SELECT * FROM film";  
@@ -98,8 +100,8 @@ import mochinema.Film;
         }  
 
 
-        public Film selectFilm(String titre){  
-            String sql = "SELECT * FROM film \n WHERE film_titre = '"+titre+"';";  
+        public Film selectFilm(int idFilm){  
+            String sql = "SELECT * FROM film \n WHERE film_id = '"+idFilm+"';";  
               
             try {  
                 Connection conn = this.connect();  
@@ -116,7 +118,39 @@ import mochinema.Film;
         } 
 
 
-        //Fait une demande SQL afin de vérifier que 
+        public Critique[] selectCritiques(int idFilm){  
+            String sql = "SELECT * FROM critique \n WHERE film_id = '"+idFilm+"';";  
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sql);  
+                int posTabCritique = 0;
+                  
+                // loop through the result set  
+                while (rs.next()) {  
+                    posTabCritique++;
+                }  
+
+                rs = stmt.executeQuery(sql);  
+                Critique[] tabCritiques = new Critique[posTabCritique];
+                int i = 0;
+                // loop through the result set  
+                while (rs.next()) {  
+                    tabCritiques[i] = new Critique(rs.getString("abonne_pseudo"), rs.getInt("film_id"), rs.getString("critique_critique"), rs.getInt("critique_note"));
+                    i++;
+                }  
+
+                stmt.close();
+                return tabCritiques;
+
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage()); 
+                return null;
+            }   
+        } 
+
+
         public boolean connection(String pseudo, String motDePasse){  
             String sql = "SELECT * FROM abonne \n WHERE abonne_pseudo = '"+pseudo+"' AND abonne_mot_passe = '"+motDePasse+"';";  
               
@@ -132,31 +166,26 @@ import mochinema.Film;
                 System.out.println(e.getMessage());  
                 return false;
             }  
-        }  
+        } 
 
 
-
-        public String getMDPAbonne(String pseudo){  
-            String sql = "SELECT * FROM abonne \n WHERE abonne_pseudo = '"+pseudo+"' ;";  
-              
-            try {  
-                Connection conn = this.connect();  
-                Statement stmt  = conn.createStatement();  
-                ResultSet rs    = stmt.executeQuery(sql);  
-                String s = rs.getString("abonne_mot_passe");
+        public float moyenneNote(int film_id){
+            String sql = "SELECT AVG(critique_note) AS mean \n FROM critique \n WHERE film_id = " + film_id+";";
+            try {
+                Connection conn = this.connect();
+                Statement stmt  = conn.createStatement();
+                ResultSet rs    = stmt.executeQuery(sql);
+                float s = rs.getFloat("mean");
                 stmt.close();
                 return s;
 
-            } catch (SQLException e) {  
-                System.out.println(e.getMessage());  
-                return null;
-            }  
-        }  
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return 0;
+            }
+        }
 
-
-
-
-           
+ 
          
         /** 
          * @param args the command line arguments 
@@ -165,6 +194,26 @@ import mochinema.Film;
             SelectRecords app = new SelectRecords();  
             // app.selectAll();  
             app.selectAllFilm();
+        }
+
+
+        public Abonne selectAbonneSpecifique(String pseudo) {
+            String sql = "SELECT * FROM abonne \n WHERE abonne_pseudo = '"+pseudo+"';";  
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sql);  
+
+                Date d = new Date(rs.getString("abonne_date_naissance"));
+                Abonne a = new Abonne(rs.getString("abonne_pseudo"), rs.getString("abonne_nom"), rs.getString("abonne_prenom"), rs.getString("abonne_adresse_mail"), rs.getString("abonne_mot_passe"), d);
+                stmt.close();
+                return a;
+
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage());  
+                return null;
+            }  
         }  
        
     }  

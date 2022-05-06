@@ -65,7 +65,7 @@ public class InscriptionController {
                     FXMLLoader newRoot = new FXMLLoader(App.class.getResource("main.fxml"));
                     Parent root = newRoot.load();
                     MainController mainC = newRoot.getController();
-                    mainC.setAbonne(a);
+                    mainC.setAbonne(a.getPseudo());
                     App.newSceneAbonne(root);
 
 

@@ -3,6 +3,7 @@ package ui;
 import java.io.IOException;
 
 import SQL.DeleteRecords;
+import SQL.SelectRecords;
 import SQL.UpgradeRecords;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -85,7 +86,7 @@ public class ProfilController {
         FXMLLoader newRoot = new FXMLLoader(App.class.getResource("main.fxml"));
         Parent root = newRoot.load();
         MainController mainC = newRoot.getController();
-        mainC.setAbonne(abonne);
+        mainC.setAbonne(abonne.getPseudo());
         App.newSceneAbonne(root);
         
     }
@@ -107,14 +108,14 @@ public class ProfilController {
         TextField text_prenom = new TextField(abonne.getPrenom());
         pane_second.getChildren().add(text_prenom);
         text_prenom.setPromptText("Prenom");
-        text_nom.setText(abonne.getPrenom());
+        text_prenom.setText(abonne.getPrenom());
         text_prenom.setLayoutX(209.);
         text_prenom.setLayoutY(29.);
 
         TextField text_mail = new TextField(abonne.getMail());
         pane_second.getChildren().add(text_mail);
         text_mail.setPromptText("Adresse e-mail");
-        text_nom.setText(abonne.getMail());
+        text_mail.setText(abonne.getMail());
         text_mail.setLayoutX(36.);
         text_mail.setLayoutY(85.);
 
@@ -137,7 +138,12 @@ public class ProfilController {
                     if(ButtonType.YES.equals(result)){
                         UpgradeRecords ur = new UpgradeRecords();
                         ur.upgradeAbonne(abonne.getPseudo(), text_prenom.getText(), text_mail.getText(), text_nom.getText());
+                        
+                        //Mise à jour de l'abonnée actuel
+                        SelectRecords sr = new SelectRecords();
+                        abonne = sr.selectAbonneSpecifique(abonne.getPseudo());
 
+                        //Une pop-up apparait pour informer que les informations ont bien été modifiées
                         Alert alert1 = new Alert(Alert.AlertType.INFORMATION); 
                         alert1.setContentText("Vos informations ont bien été modifiés !");
                         alert1.setHeaderText(null);
