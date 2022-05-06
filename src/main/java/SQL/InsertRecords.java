@@ -127,6 +127,8 @@ import java.sql.Connection;
             
             try{
                 app.insertAbonne("Invite", "Invite", "Invite", "Invite", "00/00/0000", "Invite");
+                app.insertAbonne("CommeTuVeut", "Karim", "Longchamp", "30 Impasse de la Villette", "25/10/2009", "Clear4All!");
+                app.insertAbonne("Kekw12", "Nicolas", "Redfield", "125 rue Jean Jaures", "21/04/1985", "Litter47");
 
                 app.insertCinema(1, "Les 7 nefs", "Montelimar");
                 app.insertCinema(2, "Pathe", "Valence");
@@ -153,7 +155,9 @@ import java.sql.Connection;
                 app.insertParticipant("Astier", "Alexandre", "01/11/1967", 3, "realisateur");
                 app.insertParticipant("Del Toro", "Guillermo", "09/08/1964", 4, "realisateur");
 
-
+                app.insertCritique("Kekw12", 1, "J'adore trop. Tout est trop bien. Le son, les braquages c'est ouf", 9);
+                app.insertCritique("CommeTuVeut", 1, "Meilleur film ever", 9);
+                app.insertCritique("Kekw12", 2, "Trop drole Gru");
 
 
 
