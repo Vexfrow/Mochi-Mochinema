@@ -16,7 +16,7 @@ import mochinema.Date;
 public class InscriptionController {
     
 
-    public Abonne a;
+    private Abonne a;
 
     @FXML
     private TextField text_pseudo;

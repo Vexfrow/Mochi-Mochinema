@@ -29,7 +29,7 @@ public class MainController {
 
     private Parent root;
 
-    public Abonne abonne;
+    private Abonne abonne;
 
     private Film[] tabFilm;
 

@@ -34,7 +34,7 @@ public class HomeController {
 
     private Parent root;
 
-    public Abonne a;
+    private Abonne a;
 
 
     @FXML
@@ -93,7 +93,7 @@ public class HomeController {
         root = newRoot.load();
         MainController mainC = newRoot.getController();
         SelectRecords sr = new SelectRecords();
-        a = sr.selectAbonneSpecifique("Invite","Invite");
+        a = sr.selectAbonneSpecifique("Invite");
         mainC.setAbonne(a.getPseudo());
         App.newSceneAbonne(root);
         

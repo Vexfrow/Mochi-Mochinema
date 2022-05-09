@@ -1,6 +1,6 @@
 package mochinema;
 
-public class Professionnel {
+public class Professionel {
 
 
     private String nom;
@@ -8,7 +8,7 @@ public class Professionnel {
     private Date dateNaissance;
 
 
-    public Professionnel(String nom, String prenom, Date dateNaissance){
+    public Professionel(String nom, String prenom, Date dateNaissance){
         this.nom = nom;
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;

@@ -121,6 +121,8 @@ import java.sql.Connection;
             }  
         }  
 
+
+        
         public void insertCritique(String pseudo, int filmID, String critique, int note) {
             String sql = "INSERT INTO critique(abonne_pseudo,film_id, critique_critique, critique_note) VALUES(?,?,?,?)";
 
