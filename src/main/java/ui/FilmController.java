@@ -8,9 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
@@ -103,6 +103,9 @@ public class FilmController {
             Label text_pseudo = new Label(tabCritique[i].getPseudo());
             Label text_note = new Label(""+tabCritique[i].getNote());
 
+
+            Tooltip t = new Tooltip(text_critique.getText());
+            text_critique.setTooltip(t);
             gp_critique.add(text_critique, 0, i);
             text_critique.setWrapText(true);
             GridPane.setValignment(text_critique, VPos.CENTER);
