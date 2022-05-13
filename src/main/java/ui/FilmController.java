@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
@@ -145,6 +146,11 @@ public class FilmController {
         button_critique.setPrefWidth(105.);
         button_critique.setPrefHeight(130.);
         pane_second.getChildren().add(button_critique);
+        button_critique.setOnAction(event ->{
+            commenter();
+        }
+        
+        );
 
     }
 
@@ -203,5 +209,17 @@ public class FilmController {
         return c;
     }
 
-    
+    @FXML
+    private void commenter(){
+        try{
+        FXMLLoader newRoot = new FXMLLoader(App.class.getResource("commentaire.fxml"));
+        root = newRoot.load();
+        CommentaireController comC = newRoot.getController();
+        comC.setAttributs(abonne.getPseudo(), film.getID());
+
+        App.newSceneAbonne(root); 
+        } catch (Exception e ){
+            e.printStackTrace();
+        }       
+    }
 }

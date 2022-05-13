@@ -235,6 +235,24 @@ import mochinema.Professionel;
             }  
         } 
 
+        public Critique selectPrevCrit(String pseudo, int filmID){
+            String sql = "SELECT * FROM Critique WHERE abonne_pseudo = '"+ pseudo + "' AND film_id = "+filmID + ";";
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sql);  
+
+                Critique c = new Critique(pseudo, filmID, rs.getString("critique_critique"), rs.getInt("critique_note"));
+                stmt.close();
+                return c;
+
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage());  
+                return null;
+            }
+
+        }
+
  
          
         /** 

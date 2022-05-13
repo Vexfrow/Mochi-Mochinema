@@ -57,7 +57,7 @@ import java.sql.DriverManager;
 
         //Permet de mettre à jour le mot de passe d'un abonnée à partir du pseudo
         public void upgradeCritique(String pseudoAbonne, int IDFilm, String critique, float note){ 
-            String sql = "UPDATE critique SET critique_critique = '" +  critique +"', critique_note = '"+note+"' WHERE abonne_pseudo = '"+ pseudoAbonne + "' AND film_id = '"+ IDFilm +"';";
+            String sql = "UPDATE critique SET critique_critique = \"" +  critique +"\", critique_note = '"+note+"' WHERE abonne_pseudo = '"+ pseudoAbonne + "' AND film_id = '"+ IDFilm +"';";
 
             try {
                 Connection conn = this.connect();
