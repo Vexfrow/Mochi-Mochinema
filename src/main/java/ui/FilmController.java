@@ -126,7 +126,7 @@ public class FilmController {
         float mean = sr.moyenneNote(film.getID());
 
         Circle cercle = new Circle();
-        cercle = switchColor(cercle, mean);
+        switchColor(cercle, mean);
         cercle.setLayoutX(507);
         cercle.setLayoutY(60);
         cercle.setRadius(52);
@@ -162,15 +162,16 @@ public class FilmController {
         Label texte_realisateur = new Label("Le film a été réalisé par " + real.getPrenom() + " " + real.getNom() );
         textF_info.getChildren().add(texte_realisateur);
 
-        Label texte_acteur = new Label("Les acteurs suivants ont participés au film :");
+        Label texte_acteur = new Label("\n \nLes acteurs suivants ont participés au film : \n");
         Professionel[] acteurs = sr.selectActeurs(film.getID());
         int i = 0;
 
         while(i < acteurs.length){
-            texte_acteur.setText(acteurs[i].getPrenom()+" "+ acteurs[i].getNom()+",");
-            textF_info.getChildren().add(texte_acteur);
+            texte_acteur.setText(texte_acteur.getText() + "-" +acteurs[i].getPrenom()+" "+ acteurs[i].getNom()+"," + '\n');
+           
             i++;
         }
+        textF_info.getChildren().add(texte_acteur);
         
         pane_second.getChildren().add(textF_info);
         textF_info.setLayoutX(14.);
@@ -192,7 +193,7 @@ public class FilmController {
     }
 
 
-    private Circle switchColor(Circle c, float mean){
+    private void switchColor(Circle c, float mean){
         if(mean < 4.){
             c.setFill(Color.RED);
         }else if(mean < 7.){
@@ -200,7 +201,6 @@ public class FilmController {
         }else{
             c.setFill(Color.GREEN);
         }
-        return c;
     }
 
     
