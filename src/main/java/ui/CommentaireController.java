@@ -57,14 +57,12 @@ public class CommentaireController {
             if(!previousCom){
                 InsertRecords ir = new InsertRecords();
                 ir.insertCritique(abonne.getPseudo(), film.getID(),text_area.getText() , Integer.parseInt(text_note.getText()));
-            }
-            else{
+            }else{
                 UpgradeRecords ur = new UpgradeRecords();
                 ur.upgradeCritique(abonne.getPseudo(), film.getID(),text_area.getText() , Integer.parseInt(text_note.getText()));
             }
             exit();
-        }
-        else {
+        }else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION); 
             alert.setContentText("La note n'est pas valide");
             alert.setHeaderText(null);

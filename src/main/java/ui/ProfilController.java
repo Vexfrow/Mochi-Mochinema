@@ -9,15 +9,22 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 import mochinema.Abonne;
+import mochinema.Critique;
 
 public class ProfilController {
 
@@ -52,6 +59,7 @@ public class ProfilController {
     private Pane pane_second;
 
     private Abonne abonne;
+
 
     @FXML
     private void deleteAccount() throws IOException{
@@ -220,8 +228,65 @@ public class ProfilController {
     private void showCritique(){
         pane_second.getChildren().clear();
 
-        Button button_truc = new Button("Button");
-        pane_second.getChildren().add(button_truc);
+
+        GridPane gp_critique = new GridPane();
+        gp_critique.setPrefHeight(250.);
+        gp_critique.setPrefWidth(550.);
+
+        RowConstraints rc1 = new RowConstraints();
+        rc1.setPercentHeight(275./6.);
+        RowConstraints rc2 = new RowConstraints();
+        rc2.setPercentHeight(275./6.);
+        RowConstraints rc3 = new RowConstraints();
+        rc3.setPercentHeight(275./6.);
+        RowConstraints rc4 = new RowConstraints();
+        rc4.setPercentHeight(275./6.);
+        RowConstraints rc5 = new RowConstraints();
+        rc5.setPercentHeight(275./6.);
+        RowConstraints rc6 = new RowConstraints();
+        rc6.setPercentHeight(275./6.);
+
+        ColumnConstraints cc1 = new ColumnConstraints();
+        cc1.setPercentWidth(65.);
+        ColumnConstraints cc2 = new ColumnConstraints();
+        cc2.setPercentWidth(25.);
+        ColumnConstraints cc3 = new ColumnConstraints();
+        cc3.setPercentWidth(10.);
+
+        gp_critique.getColumnConstraints().addAll(cc1,cc2,cc3);
+        gp_critique.getRowConstraints().addAll(rc1,rc2,rc3,rc4,rc5);
+        gp_critique.setGridLinesVisible(true);
+
+
+        SelectRecords sr = new SelectRecords();
+        Critique[] tabCritique = sr.selectCritiquesAbonne(abonne.getPseudo());
+        int i =0;
+
+        while(i < 5 && i < tabCritique.length){
+            Label text_critique = new Label(tabCritique[i].getCritique());
+            Label text_film = new Label(sr.selectFilm(tabCritique[i].getFilm()).getTitre());
+            Label text_note = new Label(""+tabCritique[i].getNote());
+
+            gp_critique.add(text_critique, 0, i);
+            text_critique.setWrapText(true);
+            GridPane.setValignment(text_critique, VPos.CENTER);
+            GridPane.setHalignment(text_critique, HPos.CENTER);
+
+            gp_critique.add(text_film, 1, i);
+            text_film.setWrapText(true);
+            GridPane.setHalignment(text_film, HPos.CENTER);
+            GridPane.setValignment(text_film, VPos.CENTER);
+
+            gp_critique.add(text_note, 2, i);
+            text_note.setWrapText(true);
+            GridPane.setHalignment(text_note, HPos.CENTER);
+            GridPane.setValignment(text_note, VPos.CENTER);
+            i++;
+        }
+
+        pane_second.getChildren().add(gp_critique);
+        gp_critique.setLayoutY(14.);
+        gp_critique.setLayoutX(14.);
         
     }
 

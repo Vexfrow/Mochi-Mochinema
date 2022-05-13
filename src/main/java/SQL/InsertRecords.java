@@ -34,7 +34,7 @@ import java.sql.Connection;
                 pstmt.setString(6, password);  
                 pstmt.executeUpdate();  
                 pstmt.close();
-                System.out.println("A new record has been inserted.");
+                System.out.println("Un nouveau abonné a été rajouté.");
 
             } catch (SQLException e) {  
                 System.out.println(e.getMessage());  
@@ -52,7 +52,7 @@ import java.sql.Connection;
                 pstmt.setString(3, city); 
                 pstmt.executeUpdate();  
                 pstmt.close();
-                System.out.println("A new record has been inserted.");
+                System.out.println("Un nouveau cinéma a été rajouté.");
 
             } catch (SQLException e) {  
                 System.out.println(e.getMessage());  
@@ -71,7 +71,7 @@ import java.sql.Connection;
                 pstmt.executeUpdate();  
 
                 pstmt.close();
-                System.out.println("A new record has been inserted.");
+                System.out.println("Un nouveau professionel a été rajouté.");
 
             } catch (SQLException e) {  
                 System.out.println(e.getMessage());  
@@ -91,12 +91,33 @@ import java.sql.Connection;
                 pstmt.executeUpdate();  
 
                 pstmt.close();
-                System.out.println("A new record has been inserted.");
+                System.out.println("Un nouveau film a été rajouté.");
 
             } catch (SQLException e) {  
                 System.out.println(e.getMessage());  
             }  
         }  
+
+
+        public void insertPrix(int idCinema, int idFilm, int prix) {  
+            String sql = "INSERT INTO prix(cinema_id, film_id, prix_prix) VALUES(?,?,?)";  
+       
+            try{  
+                Connection conn = this.connect();  
+                PreparedStatement pstmt = conn.prepareStatement(sql);  
+                pstmt.setInt(1, idCinema);  
+                pstmt.setInt(2, idFilm);
+                pstmt.setInt(3, prix);   
+                pstmt.executeUpdate();  
+
+                pstmt.close();
+                System.out.println("Un nouveau prix a été rajouté.");
+
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage());  
+            }  
+        }  
+
 
 
 
@@ -114,7 +135,7 @@ import java.sql.Connection;
                 pstmt.executeUpdate();  
 
                 pstmt.close();
-                System.out.println("A new record has been inserted.");
+                System.out.println("Un nouveau participant a été rajouté.");
 
             } catch (SQLException e) {  
                 System.out.println(e.getMessage());  
@@ -136,7 +157,7 @@ import java.sql.Connection;
                 pstmt.executeUpdate();
 
                 pstmt.close();
-                System.out.println("A new record has been inserted.");
+                System.out.println("Une nouvelle critique a été rajoutée.");
 
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
@@ -170,7 +191,7 @@ import java.sql.Connection;
                 app.insertProfessionel("Coffin", "Pierre", "01/11/1967");
                 app.insertProfessionel("Astier", "Alexandre", "01/11/1967");
                 app.insertProfessionel("Del Toro", "Guillermo", "09/08/1964");
-                app.insertProfessionel("Roberts", "Julia", "28 octobre 1967");
+                app.insertProfessionel("Roberts", "Julia", "28/10/1967");
                 app.insertProfessionel("Pitt", "Brad", "18/12/1963");
                 app.insertProfessionel("Kristen", "Wiig", "22/08/1973");
                 app.insertProfessionel("Beth", "Jehnny", "24/12/1984");
@@ -178,33 +199,50 @@ import java.sql.Connection;
                 app.insertProfessionel("Kikuchi", "Rinko", "06/01/1981");
                 app.insertProfessionel("Elba", "Idris", "06/09/1972");
                 app.insertProfessionel("Hunnam", "Charlie", "10/04/1980");
+                app.insertProfessionel("DeKnight", "Steven", "08/04/1964");
+                app.insertProfessionel("Boyega", "John", "17/03/1992");
+                app.insertProfessionel("Eastwood", "Scott", "08/04/1986");
                 
                 app.insertParticipant("Clooney", "George", "06/05/1961", 1, "realisateur");
                 app.insertParticipant("Clooney", "George", "6 mai 1961",1, "acteur");
                 app.insertParticipant("Pitt", "Brad", "18/12/1963", 1, "acteur");
-                app.insertParticipant("Roberts", "Julia", "28 octobre 1967",1, "acteur");
+                app.insertParticipant("Roberts", "Julia", "28/10/1967",1, "acteur");
                 app.insertParticipant("Coffin", "Pierre", "01/11/1967", 2, "realisateur");
                 app.insertParticipant("Carell", "Steve", "16/08/1962", 2, "doubleur");
-                app.insertParticipant("Coffin", "Pierre", "01/11/1967", 2, "doubleur");
                 app.insertParticipant("Kristen", "Wiig", "22/08/1973", 2, "doubleur");                 
                 app.insertParticipant("Astier", "Alexandre", "01/11/1967", 3, "realisateur");
-                app.insertParticipant("Astier", "Alexandre", "01/11/1967", 3, "acteur");
                 app.insertParticipant("Beth", "Jehnny", "01/11/1967", 3, "acteur");
                 app.insertParticipant("Pitiot", "Franck", "27/06/1964", 3, "acteur");                
                 app.insertParticipant("Del Toro", "Guillermo", "09/08/1964", 4, "realisateur");
-                app.insertParticipant("Kikuchi", "Rinko", 4, "acteur");
-                app.insertParticipant("Elba", "Idris", 4, "acteur");
-                app.insertParticipant("Hunnam", "Charlie", "10/04/1980", 4, "acteur");             
+                app.insertParticipant("Kikuchi", "Rinko","06/01/1981", 4, "acteur");
+                app.insertParticipant("Elba", "Idris", "06/09/1972", 4, "acteur");
+                app.insertParticipant("Hunnam", "Charlie", "10/04/1980", 4, "acteur"); 
+                app.insertParticipant("DeKnight", "Steven", "08/04/1964", 5, "realisateur");
+                app.insertParticipant("Kikuchi", "Rinko","06/01/1981", 5, "acteur");
+                app.insertParticipant("Boyega", "John", "17/03/1992", 5, "acteur");
+                app.insertParticipant("Eastwood", "Scott", "08/04/1986", 5, "acteur");   
                 app.insertParticipant("Coffin", "Pierre", "01/11/1967", 6, "realisateur");
                 app.insertParticipant("Carell", "Steve", "16/08/1962", 6, "doubleur");
-                app.insertParticipant("Coffin", "Pierre", "01/11/1967", 6, "doubleur");
                 app.insertParticipant("Kristen", "Wiig", "22/08/1973", 6, "doubleur");                
 
                 app.insertCritique("Kekw12", 1, "J'adore trop. Tout est trop bien. Le son, les braquages c'est ouf", 9);
                 app.insertCritique("Kameto", 1, "Ce film a un grand potentiel et je sens tout le talent de Goerge Clooney dans chaque scene d'actions", 9);
                 app.insertCritique("CommeTuVeut", 1, "Meilleur film ever", 9);
-                app.insertCritique("Invite", 1, "Nul", 0);
                 app.insertCritique("Kekw12", 2, "Trop drole Gru", 8);
+
+                app.insertPrix(1,1,10);
+                app.insertPrix(1,2,20);
+                app.insertPrix(1,4,15);
+                app.insertPrix(1,5,15);
+                app.insertPrix(2,1,15);
+                app.insertPrix(2,2,5);
+                app.insertPrix(2,6,5);
+                app.insertPrix(3,1,15);
+                app.insertPrix(3,2,5);
+                app.insertPrix(3,3,20);
+                app.insertPrix(3,4,15);
+                app.insertPrix(3,5,15);
+                app.insertPrix(3,6,5);
 
 
 

@@ -7,9 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import mochinema.Abonne;
+import mochinema.Cinema;
 import mochinema.Critique;
 import mochinema.Date;
 import mochinema.Film;
+import mochinema.Prix;
 import mochinema.Professionel;  
        
     public class SelectRecords {  
@@ -164,7 +166,7 @@ import mochinema.Professionel;
 
 
         //Permet de récuperer un tableau contenant toutes les critiques du film en question
-        public Critique[] selectCritiques(int idFilm){  
+        public Critique[] selectCritiquesFilm(int idFilm){  
             String sql = "SELECT * FROM critique \n WHERE film_id = "+idFilm+";";  
 
             //Commande SQL pour avoir le nombre de critique pour le film
@@ -193,6 +195,39 @@ import mochinema.Professionel;
                 return null;
             }   
         } 
+
+
+
+        //Permet de récuperer un tableau contenant toutes les critiques d'un abonnée
+        public Critique[] selectCritiquesAbonne(String pseudo) {
+            String sql = "SELECT * FROM critique \n WHERE abonne_pseudo = '"+pseudo+"';";  
+
+            //Commande SQL pour avoir le nombre de critique pour le film
+            String sqlNbCritique = "SELECT COUNT(film_id) AS number FROM critique WHERE abonne_pseudo = '"+pseudo+"';";
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sqlNbCritique);  
+
+                Critique[] tabCritiques = new Critique[rs.getInt("number")];
+
+                rs = stmt.executeQuery(sql);  
+                int i = 0;
+
+                while (rs.next()) {  
+                    tabCritiques[i] = new Critique(rs.getString("abonne_pseudo"), rs.getInt("film_id"), rs.getString("critique_critique"), rs.getInt("critique_note"));
+                    i++;
+                }  
+
+                stmt.close();
+                return tabCritiques;
+
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage()); 
+                return null;
+            }  
+        }
 
 
         //Permet de récuperer la moyenne des notes d'un film
@@ -235,6 +270,45 @@ import mochinema.Professionel;
             }  
         } 
 
+
+
+
+         //Permet de recuperer les données d'un abonnée à partir de son pseudo
+         public Prix[] selectPrix(int id) {
+            String sql = "SELECT prix_prix, prix.cinema_id, cinema_ville, cinema_nom FROM prix JOIN cinema ON (prix.cinema_id = cinema.cinema_id) WHERE film_id = '"+id+"';";  
+
+            //Commande SQL pour avoir le nombre de cinema qui propose le film
+            String sqlNbPrix = "SELECT COUNT(cinema_id) AS number FROM prix WHERE film_id = "+id+";";
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sqlNbPrix);
+
+                Prix[] tabPrix = new Prix[rs.getInt("number")];
+                int i = 0;
+                rs = stmt.executeQuery(sql);
+
+                while(rs.next()){
+                    SelectRecords sr = new SelectRecords();
+                    Cinema cin = new Cinema(rs.getInt("cinema_id"), rs.getString("cinema_nom"), rs.getString("cinema_ville"));
+                    Film f = sr.selectFilm(id);
+
+                    tabPrix[i] = new Prix(cin, f, rs.getInt("prix_prix"));
+                    i++;
+                }
+                
+                stmt.close();
+                return tabPrix;
+
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage());  
+                return null;
+            }  
+        } 
+
+
+
         public Critique selectPrevCrit(String pseudo, int filmID){
             String sql = "SELECT * FROM Critique WHERE abonne_pseudo = '"+ pseudo + "' AND film_id = "+filmID + ";";
             try {  
@@ -262,6 +336,13 @@ import mochinema.Professionel;
             SelectRecords app = new SelectRecords();  
             // app.selectAll();  
             app.selectAllFilm();
+        }
+
+
+
+
+        public Object selectCritiques(String pseudo) {
+            return null;
         }
 
  
