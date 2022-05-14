@@ -101,7 +101,7 @@ public class HomeController {
 
     @FXML
     private void initialize() throws FileNotFoundException{
-        Image image = new Image(new FileInputStream("./src/main/resources/image/test.png"));
+        Image image = new Image(new FileInputStream("./src/main/resources/image/home.png"));
         image_test.setImage(image);
         
     }

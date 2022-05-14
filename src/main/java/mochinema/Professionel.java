@@ -5,10 +5,10 @@ public class Professionel {
 
     private String nom;
     private String prenom;
-    private Date dateNaissance;
+    private String dateNaissance;
 
 
-    public Professionel(String nom, String prenom, Date dateNaissance){
+    public Professionel(String nom, String prenom, String dateNaissance){
         this.nom = nom;
         this.prenom = prenom;
         this.dateNaissance = dateNaissance;
@@ -23,7 +23,7 @@ public class Professionel {
         return prenom;
     }
 
-    public Date getDateNaissance(){
+    public String getDateNaissance(){
         return dateNaissance;
     }
     

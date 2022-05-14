@@ -204,7 +204,6 @@ import java.sql.Connection;
                 app.insertProfessionel("Eastwood", "Scott", "08/04/1986");
                 
                 app.insertParticipant("Clooney", "George", "06/05/1961", 1, "realisateur");
-                app.insertParticipant("Clooney", "George", "6 mai 1961",1, "acteur");
                 app.insertParticipant("Pitt", "Brad", "18/12/1963", 1, "acteur");
                 app.insertParticipant("Roberts", "Julia", "28/10/1967",1, "acteur");
                 app.insertParticipant("Coffin", "Pierre", "01/11/1967", 2, "realisateur");

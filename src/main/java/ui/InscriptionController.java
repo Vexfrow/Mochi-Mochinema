@@ -11,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 import mochinema.Abonne;
-import mochinema.Date;
 
 public class InscriptionController {
     
@@ -48,8 +47,7 @@ public class InscriptionController {
             if(text_mdp1.getText().equals(text_mdp2.getText())){
                 try{
                     //On crée un nouvel abonnée
-                    Date dateNaissance = new Date(text_birthday.getText());
-                    a = new Abonne(text_pseudo.getText(), text_nom.getText(), text_prenom.getText(), text_mail.getText(), text_mdp1.getText(), dateNaissance);
+                    a = new Abonne(text_pseudo.getText(), text_nom.getText(), text_prenom.getText(), text_mail.getText(), text_mdp1.getText(), text_birthday.getText());
 
                     //On regarde si on peut insérer le nouvel abonnée dans la base de donnée
                     InsertRecords ir = new InsertRecords();

@@ -53,7 +53,7 @@ public class CommentaireController {
     @FXML
     private void submit() throws IOException{
 
-        if(estNombre(text_note.getText())){
+        if(estNombre(text_note.getText()) && Integer.parseInt(text_note.getText()) >= 0 && Integer.parseInt(text_note.getText()) <= 10){
             if(!previousCom){
                 InsertRecords ir = new InsertRecords();
                 ir.insertCritique(abonne.getPseudo(), film.getID(),text_area.getText() , Integer.parseInt(text_note.getText()));
@@ -64,7 +64,7 @@ public class CommentaireController {
             exit();
         }else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION); 
-            alert.setContentText("La note n'est pas valide");
+            alert.setContentText("La note n'est pas valide, elle doit être comprise entre 0 et 10");
             alert.setTitle("Invalid comment format");
             alert.setHeaderText(null);
             alert.showAndWait();

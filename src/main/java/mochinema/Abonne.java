@@ -7,10 +7,10 @@ public class Abonne {
     private String prenom;
     private String adresseMail;
     private String motDePasse;
-    private Date dateDeNaissance;
+    private String dateDeNaissance;
 
 
-    public Abonne(String pseudo, String nom, String prenom, String adresseMail, String motDePasse, Date dateDeNaissance){
+    public Abonne(String pseudo, String nom, String prenom, String adresseMail, String motDePasse, String dateDeNaissance){
         this.pseudo = pseudo;
         this.nom = nom;
         this.prenom = prenom;
@@ -40,7 +40,7 @@ public class Abonne {
     }
 
 
-    public Date getDateNaissance(){
+    public String getDateNaissance(){
         return dateDeNaissance;
     }
 

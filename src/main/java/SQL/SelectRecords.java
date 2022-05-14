@@ -9,7 +9,6 @@ import java.sql.Statement;
 import mochinema.Abonne;
 import mochinema.Cinema;
 import mochinema.Critique;
-import mochinema.Date;
 import mochinema.Film;
 import mochinema.Prix;
 import mochinema.Professionel;  
@@ -79,8 +78,7 @@ import mochinema.Professionel;
                 Statement stmt  = conn.createStatement();  
                 ResultSet rs    = stmt.executeQuery(sql);  
 
-                Date d = new Date(rs.getString("abonne_date_naissance"));
-                Abonne a = new Abonne(rs.getString("abonne_pseudo"), rs.getString("abonne_nom"), rs.getString("abonne_prenom"), rs.getString("abonne_adresse_mail"), rs.getString("abonne_mot_passe"), d);
+                Abonne a = new Abonne(rs.getString("abonne_pseudo"), rs.getString("abonne_nom"), rs.getString("abonne_prenom"), rs.getString("abonne_adresse_mail"), rs.getString("abonne_mot_passe"), rs.getString("abonne_date_naissance"));
                 stmt.close();
                 return a;
 
@@ -119,8 +117,7 @@ import mochinema.Professionel;
                 Connection conn = this.connect();  
                 Statement stmt  = conn.createStatement();  
                 ResultSet rs    = stmt.executeQuery(sql);  
-                Date d = new Date(rs.getString("professionel_date_naissance"));
-                Professionel f = new Professionel(rs.getString("professionel_nom"), rs.getString("professionel_prenom"), d);
+                Professionel f = new Professionel(rs.getString("professionel_nom"), rs.getString("professionel_prenom"), rs.getString("professionel_date_naissance"));
                 stmt.close();
                 return f;
 
@@ -131,12 +128,9 @@ import mochinema.Professionel;
         } 
 
 
-
-         //Permet de récuperer un tableau contenant toutes les critiques du film en question
          public Professionel[] selectActeurs(int idFilm){  
             String sql = "SELECT * FROM participant \n WHERE film_id = '"+idFilm+"' AND (participant_profession = 'acteur' OR  participant_profession = 'doubleur');";  
-
-            //Commande SQL pour avoir le nombre de critique pour le film
+        
             String sqlNbProfessionel = "SELECT COUNT(professionel_nom) AS number FROM participant \n WHERE film_id = '"+idFilm+"' AND (participant_profession = 'acteur' OR  participant_profession = 'doubleur');";
               
             try {  
@@ -150,8 +144,7 @@ import mochinema.Professionel;
                 int i = 0;
 
                 while (rs.next()) {  
-                    Date d = new Date(rs.getString("professionel_date_naissance"));
-                    tabActeurs[i] =  new Professionel(rs.getString("professionel_nom"), rs.getString("professionel_prenom"), d);
+                    tabActeurs[i] =  new Professionel(rs.getString("professionel_nom"), rs.getString("professionel_prenom"), rs.getString("professionel_date_naissance"));
                     i++;
                 }  
 
@@ -230,6 +223,38 @@ import mochinema.Professionel;
         }
 
 
+
+         //Permet de récuperer un tableau contenant tout les film dans lequel a joué un acteur
+         public String[] selectFilmParticipant(String nom, String prenom, String dateNaissance) {
+            String sql = "SELECT film_titre FROM participant JOIN film USING (film_id) \n WHERE professionel_nom = '"+nom+"' AND professionel_prenom = '"+prenom+"' AND professionel_date_naissance = '"+dateNaissance+"';";
+
+            //Commande SQL pour avoir le nombre de film pour l'acteur
+            String sqlNbCritique = "SELECT COUNT(film_id) AS number FROM participant WHERE professionel_nom = '"+nom+"' AND professionel_prenom = '"+prenom+"' AND professionel_date_naissance = '"+dateNaissance.toString()+"';";
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sqlNbCritique);  
+                String[] tabFilm = new String[rs.getInt("number")];
+
+                rs = stmt.executeQuery(sql);  
+                int i = 0;
+
+                while (rs.next()) {  
+                    tabFilm[i] = rs.getString("film_titre");
+                    i++;
+                }  
+
+                stmt.close();
+                return tabFilm;
+
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage()); 
+                return null;
+            }  
+        }
+
+
         //Permet de récuperer la moyenne des notes d'un film
         public float moyenneNote(int film_id){
             String sql = "SELECT AVG(critique_note) AS mean \n FROM critique \n WHERE film_id = " + film_id+";";
@@ -259,8 +284,7 @@ import mochinema.Professionel;
                 Statement stmt  = conn.createStatement();  
                 ResultSet rs    = stmt.executeQuery(sql);  
 
-                Date d = new Date(rs.getString("abonne_date_naissance"));
-                Abonne a = new Abonne(rs.getString("abonne_pseudo"), rs.getString("abonne_nom"), rs.getString("abonne_prenom"), rs.getString("abonne_adresse_mail"), rs.getString("abonne_mot_passe"), d);
+                Abonne a = new Abonne(rs.getString("abonne_pseudo"), rs.getString("abonne_nom"), rs.getString("abonne_prenom"), rs.getString("abonne_adresse_mail"), rs.getString("abonne_mot_passe"), rs.getString("abonne_date_naissance"));
                 stmt.close();
                 return a;
 
@@ -338,12 +362,6 @@ import mochinema.Professionel;
             app.selectAllFilm();
         }
 
-
-
-
-        public Object selectCritiques(String pseudo) {
-            return null;
-        }
 
  
        
