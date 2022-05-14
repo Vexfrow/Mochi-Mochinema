@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import SQL.SelectRecords;
 import javafx.fxml.FXML;
@@ -8,7 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.text.Text;
@@ -303,6 +306,25 @@ public class FilmController {
     //Permet d'ouvir la page "commentaire" qui permet de gerer le commentaire de l'abonné sur le film en question
     @FXML
     private void commenter(){
+        if(abonne.getPseudo().equals("Invite"))
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            ButtonType invite_button = new ButtonType("Se connecter");
+            alert.getButtonTypes().add(invite_button);
+            alert.setHeaderText("Connectez-vous pour commenter ce film");
+            Optional<ButtonType> option = alert.showAndWait();
+            if(option.get() == invite_button){
+                try{
+                FXMLLoader newRoot = new FXMLLoader(App.class.getResource("home.fxml"));
+                root = newRoot.load();
+                App.newSceneAbonne(root);
+                } catch (Exception e){
+                    System.out.println(e);
+                }
+            }
+
+        }
+        else{
         try{
             FXMLLoader newRoot = new FXMLLoader(App.class.getResource("commentaire.fxml"));
             root = newRoot.load();
@@ -312,6 +334,7 @@ public class FilmController {
             App.newSceneAbonne(root); 
         } catch (Exception e ){
             e.printStackTrace();
-        }       
+        }      
+    } 
     }
 }

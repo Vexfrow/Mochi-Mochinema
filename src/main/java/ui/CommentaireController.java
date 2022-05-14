@@ -65,6 +65,7 @@ public class CommentaireController {
         }else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION); 
             alert.setContentText("La note n'est pas valide");
+            alert.setTitle("Invalid comment format");
             alert.setHeaderText(null);
             alert.showAndWait();
         }
