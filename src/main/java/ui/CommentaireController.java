@@ -75,7 +75,7 @@ public class CommentaireController {
     public void setAttributs(String pseudo, int filmID){
         SelectRecords sr = new SelectRecords();
         this.abonne = sr.selectAbonneSpecifique(pseudo);
-        this.film = sr.selectFilm(filmID);
+        this.film = sr.selectFilmId(filmID);
 
         Critique c = sr.selectPrevCrit(pseudo, filmID);
         previousCom = c != null;

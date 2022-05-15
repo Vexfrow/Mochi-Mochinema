@@ -31,13 +31,12 @@ import mochinema.Professionel;
 
         //Permet de récuperer un tableau contenant tout les films de la base de données
         public Film[] selectAllFilm(){  
-
             //Commande SQL pour récupérer les informations sur tout les film
             String sql = "SELECT * FROM film"; 
             
             //Commande SQL pour avoir le nombre de film
             String sqlNbFilm = "SELECT COUNT(film_id) AS number FROM film";
-              
+
             try {  
                 Connection conn = this.connect();  
                 Statement stmt  = conn.createStatement();  
@@ -90,7 +89,7 @@ import mochinema.Professionel;
 
 
         //Permet de récuperer les données d'un film à partir de son id
-        public Film selectFilm(int idFilm){  
+        public Film selectFilmId(int idFilm){  
             String sql = "SELECT * FROM film \n WHERE film_id = '"+idFilm+"';";  
               
             try {  
@@ -150,6 +149,68 @@ import mochinema.Professionel;
 
                 stmt.close();
                 return tabActeurs;
+
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage()); 
+                return null;
+            }   
+        }
+
+
+
+        public Professionel[] selectAllActeurs(){  
+            String sql = "SELECT * FROM participant \n WHERE participant_profession = 'acteur' OR  participant_profession = 'doubleur';";  
+        
+            String sqlNbProfessionel = "SELECT COUNT(professionel_nom) AS number FROM participant \n WHERE participant_profession = 'acteur' OR  participant_profession = 'doubleur';";
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sqlNbProfessionel);  
+
+                Professionel[] tabActeurs = new Professionel[rs.getInt("number")];
+
+                rs = stmt.executeQuery(sql);  
+                int i = 0;
+
+                while (rs.next()) {  
+                    tabActeurs[i] =  new Professionel(rs.getString("professionel_nom"), rs.getString("professionel_prenom"), rs.getString("professionel_date_naissance"));
+                    i++;
+                }  
+
+                stmt.close();
+                return tabActeurs;
+
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage()); 
+                return null;
+            }   
+        }
+
+
+
+        public int[] selectAllAnneeFilm(){  
+            String sql = "SELECT film_annee_production FROM film;";  
+        
+            String sqlNbProfessionel = "SELECT COUNT(film_annee_production) AS number FROM film ;";
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sqlNbProfessionel);  
+
+                int[] tabAnnee = new int[rs.getInt("number")];
+
+                rs = stmt.executeQuery(sql);  
+                int i = 0;
+
+                while (rs.next()) {  
+                    tabAnnee[i] =  rs.getInt("film_annee_production");
+                    i++;
+                }  
+
+                stmt.close();
+                return tabAnnee;
 
             } catch (SQLException e) {  
                 System.out.println(e.getMessage()); 
@@ -225,8 +286,8 @@ import mochinema.Professionel;
 
 
          //Permet de récuperer un tableau contenant tout les film dans lequel a joué un acteur
-         public String[] selectFilmParticipant(String nom, String prenom, String dateNaissance) {
-            String sql = "SELECT film_titre FROM participant JOIN film USING (film_id) \n WHERE professionel_nom = '"+nom+"' AND professionel_prenom = '"+prenom+"' AND professionel_date_naissance = '"+dateNaissance+"';";
+         public Film[] selectFilmParticipant(String nom, String prenom, String dateNaissance) {
+            String sql = "SELECT film_titre, film_id, film_annee_production FROM participant JOIN film USING (film_id) \n WHERE professionel_nom = '"+nom+"' AND professionel_prenom = '"+prenom+"' AND professionel_date_naissance = '"+dateNaissance+"';";
 
             //Commande SQL pour avoir le nombre de film pour l'acteur
             String sqlNbCritique = "SELECT COUNT(film_id) AS number FROM participant WHERE professionel_nom = '"+nom+"' AND professionel_prenom = '"+prenom+"' AND professionel_date_naissance = '"+dateNaissance.toString()+"';";
@@ -235,13 +296,83 @@ import mochinema.Professionel;
                 Connection conn = this.connect();  
                 Statement stmt  = conn.createStatement();  
                 ResultSet rs    = stmt.executeQuery(sqlNbCritique);  
-                String[] tabFilm = new String[rs.getInt("number")];
+                Film[] tabFilm = new Film[rs.getInt("number")];
 
                 rs = stmt.executeQuery(sql);  
                 int i = 0;
 
                 while (rs.next()) {  
-                    tabFilm[i] = rs.getString("film_titre");
+                    tabFilm[i] = new Film(rs.getInt("film_id"), rs.getString("film_titre"), rs.getInt("film_annee_production"));
+                    i++;
+                }  
+
+                stmt.close();
+                return tabFilm;
+
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage()); 
+                return null;
+            }  
+        }
+
+
+
+        //Permet de récuperer un tableau contenant tout les film sortis après une année demandée
+        public Film[] selectFilmAnnee(int annee) {
+            String sql = "SELECT film_titre, film_id, film_annee_production FROM film WHERE film_annee_production >= "+ annee+" ORDER BY film_annee_production ASC;";
+
+            //Commande SQL pour avoir le nombre de film pour l'acteur
+            String sqlNbFilm = "SELECT COUNT(film_id) AS number FROM film WHERE film_annee_production >= "+ annee+";";
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sqlNbFilm);  
+                Film[] tabFilm = new Film[rs.getInt("number")];
+
+                rs = stmt.executeQuery(sql);  
+                int i = 0;
+
+                while (rs.next()) {  
+                    tabFilm[i] = new Film(rs.getInt("film_id"), rs.getString("film_titre"), rs.getInt("film_annee_production"));
+                    i++;
+                }  
+
+                stmt.close();
+                return tabFilm;
+
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage()); 
+                return null;
+            }  
+        }
+
+
+        //Permet de récuperer un tableau contenant tout les film sortis après une année demandée
+        public Film[] selectFilmAnneeActeur(String nom, String prenom, String dateNaissance, int annee) {
+            String sql = "SELECT film_titre, film_id, film_annee_production FROM film WHERE film_annee_production >= "+ annee
+                        + " INTERSECT "
+                        + "SELECT film_titre, film_id, film_annee_production FROM participant JOIN film USING (film_id) \n WHERE professionel_nom = '"+nom+"' AND professionel_prenom = '"+prenom+"' AND professionel_date_naissance = '"+dateNaissance+"' "
+                        + "ORDER BY film_annee_production ASC;";
+
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sql);  
+
+                int taille = 0;
+                while(rs.next()){
+                    taille++;
+                }
+
+                Film[] tabFilm = new Film[taille];
+
+                rs = stmt.executeQuery(sql);  
+                int i = 0;
+
+                while (rs.next()) {  
+                    tabFilm[i] = new Film(rs.getInt("film_id"), rs.getString("film_titre"), rs.getInt("film_annee_production"));
                     i++;
                 }  
 
@@ -316,7 +447,7 @@ import mochinema.Professionel;
                 while(rs.next()){
                     SelectRecords sr = new SelectRecords();
                     Cinema cin = new Cinema(rs.getInt("cinema_id"), rs.getString("cinema_nom"), rs.getString("cinema_ville"));
-                    Film f = sr.selectFilm(id);
+                    Film f = sr.selectFilmId(id);
 
                     tabPrix[i] = new Prix(cin, f, rs.getInt("prix_prix"));
                     i++;

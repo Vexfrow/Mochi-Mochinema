@@ -264,7 +264,7 @@ public class ProfilController {
 
         while(i < 5 && i < tabCritique.length){
             Label text_critique = new Label(tabCritique[i].getCritique());
-            Label text_film = new Label(sr.selectFilm(tabCritique[i].getFilm()).getTitre());
+            Label text_film = new Label(sr.selectFilmId(tabCritique[i].getFilm()).getTitre());
             Label text_note = new Label(""+tabCritique[i].getNote());
 
             gp_critique.add(text_critique, 0, i);

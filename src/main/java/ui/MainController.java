@@ -61,6 +61,21 @@ public class MainController {
         
     }
 
+
+
+    @FXML
+    private void recherche() throws IOException{
+        //Blabla pour retourner à l'écran principale
+        FXMLLoader newRoot = new FXMLLoader(App.class.getResource("search.fxml"));
+        Parent root = newRoot.load();
+        SearchController searchC = newRoot.getController();
+        searchC.setParameters(abonne.getPseudo());
+        App.newSceneAbonne(root);
+    }
+
+
+
+
     @FXML
     private void Deconnexion() throws IOException{
         if(abonne.getPseudo().equals("Invite")){
@@ -130,6 +145,7 @@ public class MainController {
         SelectRecords sr = new SelectRecords();
         sr.selectAbonneSpecifique(pseudo);
         abonne = sr.selectAbonneSpecifique(pseudo);
+
         button_profil.setDisable(pseudo.equals("Invite"));
         text_test.setText("Hello " + abonne.getPseudo());
         text_test.setTextAlignment(TextAlignment.CENTER);

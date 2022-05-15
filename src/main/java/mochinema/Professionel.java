@@ -26,5 +26,9 @@ public class Professionel {
     public String getDateNaissance(){
         return dateNaissance;
     }
+
+    public String toString(){
+        return (prenom + " " + nom);
+    }
     
 }

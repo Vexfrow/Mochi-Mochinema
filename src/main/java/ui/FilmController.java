@@ -233,11 +233,11 @@ public class FilmController {
             Label texte_acteurSpe = new Label(acteurs[i].getPrenom() +" " + acteurs[i].getNom() + "; ");
 
             //Configuration pour la bulle de texte qui apparait quand on passe la souris sur le nom d'un acteur/doubleur
-            String[] filmPro = sr.selectFilmParticipant(acteurs[i].getNom(), acteurs[i].getPrenom(), acteurs[i].getDateNaissance().toString());
+            Film[] filmPro = sr.selectFilmParticipant(acteurs[i].getNom(), acteurs[i].getPrenom(), acteurs[i].getDateNaissance().toString());
             String listeFilm = acteurs[i].getPrenom() +" " + acteurs[i].getNom() + " a joué dans les films suivants :\n";
             int m = 0;
             while(m < filmPro.length){
-                listeFilm = listeFilm + filmPro[m] + "; ";
+                listeFilm = listeFilm + filmPro[m].getTitre() + "; ";
                 m++;
             }
             listeFilm = listeFilm + '\n';
@@ -249,7 +249,7 @@ public class FilmController {
         }
 
         //On récupère la date d e sortie du film que l'on affiche dans la zone de texte
-        Label texte_anneeReal = new Label("\n\nLe film a été réalisé en " + film.getDateProduction());
+        Label texte_anneeReal = new Label("                    \n\nLe film a été réalisé en " + film.getDateProduction());
         textF_info.getChildren().add(texte_anneeReal);
 
         pane_second.getChildren().add(textF_info);
@@ -372,7 +372,7 @@ public class FilmController {
     public void setParametre(String pseudo, int idFilm){
         SelectRecords sr = new SelectRecords();
         abonne = sr.selectAbonneSpecifique(pseudo);
-        film = sr.selectFilm(idFilm);
+        film = sr.selectFilmId(idFilm);
         text_titre.setText(film.getTitre());
         showInformation();
 
