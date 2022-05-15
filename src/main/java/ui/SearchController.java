@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.TextAlignment;
 import mochinema.Abonne;
@@ -33,6 +34,9 @@ public class SearchController {
     @FXML 
     private GridPane grid_film;
 
+    @FXML 
+    private Pane pane_main;
+
     private Parent root;
 
     private Abonne abonne;
@@ -47,6 +51,10 @@ public class SearchController {
     
 
     public void initialize(){
+        pane_main.setPrefHeight(400);
+        pane_main.setPrefWidth(600);
+        pane_main.setMinHeight(400);
+        pane_main.setMinWidth(600);
         SelectRecords sr = new SelectRecords();
         Professionel[] listeActeur = sr.selectAllActeurs();
         int i = 0;

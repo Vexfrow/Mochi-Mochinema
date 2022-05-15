@@ -190,9 +190,9 @@ import mochinema.Professionel;
 
 
         public int[] selectAllAnneeFilm(){  
-            String sql = "SELECT film_annee_production FROM film;";  
+            String sql = "SELECT DISTINCT film_annee_production FROM film;";  
         
-            String sqlNbProfessionel = "SELECT COUNT(film_annee_production) AS number FROM film ;";
+            String sqlNbProfessionel = "SELECT COUNT(DISTINCT film_annee_production) AS number FROM film ;";
               
             try {  
                 Connection conn = this.connect();  
