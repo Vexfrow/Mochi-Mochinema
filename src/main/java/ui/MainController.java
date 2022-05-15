@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import SQL.SelectRecords;
 import javafx.fxml.FXML;
@@ -8,8 +9,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -26,6 +30,9 @@ public class MainController {
 
     @FXML
     private GridPane gp_main;
+
+    @FXML
+    private  Button button_deconnexion;
 
     private Parent root;
 
@@ -51,7 +58,37 @@ public class MainController {
         SelectRecords sr = new SelectRecords();
         tabFilm = sr.selectAllFilm();
         remplirListeFilm(tabFilm);
+
         
+    }
+
+    @FXML
+    private void Deconnexion() throws IOException{
+        if(abonne.getPseudo().equals("Invite")){
+            FXMLLoader newRoot = new FXMLLoader(App.class.getResource("home.fxml"));
+            root = newRoot.load();
+            App.newSceneAbonne(root);
+        }
+        else{
+            try{
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Déconnexion");
+                alert.setContentText("Voulez-vous vraiment vous deconnecter");
+                Optional<ButtonType> option = alert.showAndWait();
+                if(option.get() == ButtonType.OK)
+                {
+                    FXMLLoader newRoot = new FXMLLoader(App.class.getResource("home.fxml"));
+                    root = newRoot.load();
+                    App.newSceneAbonne(root);
+                }
+
+
+            } catch (Exception e){
+                System.out.println(e);
+            }
+            
+        }
+
     }
 
 
@@ -96,6 +133,9 @@ public class MainController {
         abonne = sr.selectAbonneSpecifique(pseudo);
         button_profil.setDisable(pseudo.equals("Invite"));
         text_test.setText("Hello " + abonne.getPseudo());
+        if(abonne.getPseudo().equals("Invite")){
+            button_deconnexion.setText("Connexion");
+        }
     }
 
     

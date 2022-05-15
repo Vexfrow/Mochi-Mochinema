@@ -373,7 +373,6 @@ public class FilmController {
         SelectRecords sr = new SelectRecords();
         abonne = sr.selectAbonneSpecifique(pseudo);
         film = sr.selectFilm(idFilm);
-
         text_titre.setText(film.getTitre());
         showInformation();
 
