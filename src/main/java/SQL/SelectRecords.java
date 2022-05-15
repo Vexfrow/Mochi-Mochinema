@@ -159,9 +159,9 @@ import mochinema.Professionel;
 
 
         public Professionel[] selectAllActeurs(){  
-            String sql = "SELECT * FROM participant \n WHERE participant_profession = 'acteur' OR  participant_profession = 'doubleur';";  
+            String sql = "SELECT DISTINCT professionel_nom, professionel_prenom, professionel_date_naissance FROM participant \n WHERE participant_profession = 'acteur' OR  participant_profession = 'doubleur';";  
         
-            String sqlNbProfessionel = "SELECT COUNT(professionel_nom) AS number FROM participant \n WHERE participant_profession = 'acteur' OR  participant_profession = 'doubleur';";
+            String sqlNbProfessionel = "SELECT COUNT(DISTINCT professionel_nom) AS number FROM participant \n WHERE participant_profession = 'acteur' OR  participant_profession = 'doubleur';";
               
             try {  
                 Connection conn = this.connect();  
