@@ -133,6 +133,7 @@ public class MainController {
         abonne = sr.selectAbonneSpecifique(pseudo);
         button_profil.setDisable(pseudo.equals("Invite"));
         text_test.setText("Hello " + abonne.getPseudo());
+        text_test.setTextAlignment(TextAlignment.CENTER);
         if(abonne.getPseudo().equals("Invite")){
             button_deconnexion.setText("Connexion");
         }
