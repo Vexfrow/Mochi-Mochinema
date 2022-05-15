@@ -221,7 +221,7 @@ public class FilmController {
         //On récupère le nom du réalisateur et on l'affiche
         SelectRecords sr = new SelectRecords();
         Professionel real = sr.selectRealisateur(film.getID());
-        Label texte = new Label("Le film a été réalisé par " + real.getPrenom() + " " + real.getNom() + "\nLes acteurs suivants ont participés au film : \n");
+        Label texte = new Label("Le film a été réalisé par " + real.getPrenom() + " " + real.getNom() + "            \nLes acteurs suivants ont participés au film : \n");
         textF_info.getChildren().add(texte);
 
         //On récupère la liste des acteurs

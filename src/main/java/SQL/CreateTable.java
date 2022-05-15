@@ -36,7 +36,7 @@ import java.sql.Connection;
                     + " professionel_nom text,\n"  
                     + " professionel_prenom text,\n"  
                     + " professionel_date_naissance text,\n" 
-                    + " PRIMARY KEY (professionel_nom, professionel_prenom, professionel_date_naissance)" 
+                    + " CONSTRAINT pk_pro_nom_pre_naiss PRIMARY KEY (professionel_nom, professionel_prenom, professionel_date_naissance)" 
                     + " );";  
               
             try{  
@@ -80,11 +80,11 @@ import java.sql.Connection;
                     + " professionel_date_naissance text,\n"
                     + " film_id integer,\n"
                     + " participant_profession text,\n"
-                    + " PRIMARY KEY(professionel_nom, professionel_prenom, professionel_date_naissance, film_id),\n"
-                    + " FOREIGN KEY(professionel_nom) REFERENCES professionel(professionel_nom),\n"
-                    + " FOREIGN KEY(professionel_prenom) REFERENCES professionel(professionel_prenom),\n"
-                    + " FOREIGN KEY(professionel_date_naissance) REFERENCES professionel(professionel_date_naissance),\n"
-                    + " FOREIGN KEY(film_id) REFERENCES film(film_id),\n"
+                    + " CONSTRAINT pk_part PRIMARY KEY(professionel_nom, professionel_prenom, professionel_date_naissance, film_id),\n"
+                    + " CONSTRAINT fk_pro_nom FOREIGN KEY(professionel_nom) REFERENCES professionel(professionel_nom) ON DELETE CASCADE ON UPDATE CASCADE,\n"
+                    + " CONSTRAINT fk_pro_prenom FOREIGN KEY(professionel_prenom) REFERENCES professionel(professionel_prenom) ON DELETE CASCADE ON UPDATE CASCADE,\n"
+                    + " CONSTRAINT fk_pro_date_naiss FOREIGN KEY(professionel_date_naissance) REFERENCES professionel(professionel_date_naissance) ON DELETE CASCADE ON UPDATE CASCADE,\n"
+                    + " CONSTRAINT fk_film_id FOREIGN KEY(film_id) REFERENCES film(film_id) ON DELETE CASCADE ON UPDATE CASCADE,\n"
                     + " CONSTRAINT ck_participant CHECK (participant_profession == 'realisateur' OR participant_profession == 'acteur' OR participant_profession == 'doubleur')" 
                     + " );";  
               
@@ -130,8 +130,8 @@ import java.sql.Connection;
                     + "critique_critique VARCHAR(240) NOT NULL,\n"
                     + "critique_note INTEGER,\n"  
                     + "CONSTRAINT pk_critique_pseudo_id PRIMARY KEY (abonne_pseudo, film_id),\n"
-                    + "CONSTRAINT fk_critique_pseudo FOREIGN KEY (abonne_pseudo) REFERENCES Abonne (abonne_pseudo) ON DELETE CASCADE ON UPDATE CASCADE,\n"
-                    + "CONSTRAINT fk_critique_film FOREIGN KEY (film_id) REFERENCES Film(film_id) ON DELETE CASCADE ON UPDATE CASCADE,\n"
+                    + "CONSTRAINT fk_critique_pseudo FOREIGN KEY (abonne_pseudo) REFERENCES abonne (abonne_pseudo) ON DELETE CASCADE ON UPDATE CASCADE,\n"
+                    + "CONSTRAINT fk_critique_film FOREIGN KEY (film_id) REFERENCES film(film_id) ON DELETE CASCADE ON UPDATE CASCADE,\n"
                     + "CONSTRAINT ck_critique_note CHECK (critique_note >= 0 AND critique_note <= 10), \n"
                     + "CONSTRAINT ck_critique_taille CHECK (LENGTH(critique_critique) <= 240) \n"
                     + ");";  
@@ -154,8 +154,8 @@ import java.sql.Connection;
                     + "film_id INTEGER,\n"  
                     + "prix_prix INTEGER NOT NULL,\n" 
                     + "CONSTRAINT pk_prix_id_id PRIMARY KEY (cinema_id, film_id),\n"
-                    + "CONSTRAINT fk_prix_cinID FOREIGN KEY (cinema_id) REFERENCES Abonne (cinema_id) ON DELETE CASCADE ON UPDATE CASCADE,\n"
-                    + "CONSTRAINT fk_prix_filmID FOREIGN KEY (film_id) REFERENCES Film(film_id) ON DELETE CASCADE ON UPDATE CASCADE,\n"
+                    + "CONSTRAINT fk_prix_cinID FOREIGN KEY (cinema_id) REFERENCES abonne (cinema_id) ON DELETE CASCADE ON UPDATE CASCADE,\n"
+                    + "CONSTRAINT fk_prix_filmID FOREIGN KEY (film_id) REFERENCES film (film_id) ON DELETE CASCADE ON UPDATE CASCADE,\n"
                     + "CONSTRAINT ck_prix_prix CHECK (prix_prix >= 0) \n"
                     + ");";  
               

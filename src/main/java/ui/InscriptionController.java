@@ -51,7 +51,7 @@ public class InscriptionController {
 
                     //On regarde si on peut insérer le nouvel abonnée dans la base de donnée
                     InsertRecords ir = new InsertRecords();
-                    ir.insertAbonne(a.getPseudo(), a.getNom(), a.getPrenom(), a.getMail(), text_birthday.getText(), a.getMDP());
+                    ir.insertAbonne(a.getPseudo(), a.getNom(), a.getPrenom(), a.getMail(), a.getDateNaissance(), a.getMDP());
 
                     //Un message informatif apparaît pour confirmer l'inscription
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);

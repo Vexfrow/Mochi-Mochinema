@@ -228,6 +228,15 @@ import java.sql.Connection;
                 app.insertCritique("Kameto", 1, "Ce film a un grand potentiel et je sens tout le talent de Goerge Clooney dans chaque scene d'actions", 9);
                 app.insertCritique("CommeTuVeut", 1, "Meilleur film ever", 9);
                 app.insertCritique("Kekw12", 2, "Trop drole Gru", 8);
+                app.insertCritique("CommeTuVeut", 6, "Nul ! J'ai préféré le premier", 5);
+                app.insertCritique("CommeTuVeut", 2, "Nul ! J'ai préféré le deucième", 3);
+                app.insertCritique("Kekw12", 6, "Elie semmoun est un mauvais acteur !!!!!!!!", 2);
+                app.insertCritique("Kameto", 3, "J'ai bien aimé le plan d'exposition qui met en valeur le coté schopenhauer-esque de notre société", 10);
+                app.insertCritique("Kameto", 5, "J'ai bien aimé quand les voitures faisaient vroom et que les robots faisaient pan pan", 8);
+                app.insertCritique("Kameto", 4, "J'ai bien aimé quand les voitures faisaient vroom et que les robots faisaient pan pan", 8);
+                app.insertCritique("Kekw12", 3, "C'est pas faux lol", 6);
+                app.insertCritique("Laink", 4, "C'est pas marrant", 4);
+                app.insertCritique("Laink", 5, "C'est pas marrant", 4);
 
                 app.insertPrix(1,1,10);
                 app.insertPrix(1,2,20);

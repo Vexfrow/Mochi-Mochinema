@@ -207,7 +207,7 @@ public class ProfilController {
                     }
                 }else{
                     Alert alert1 = new Alert(Alert.AlertType.ERROR); 
-                    alert1.setContentText("Le mot de passe actuel ne correspond pas, ou les deux nouveaux mots de passe ne fonctionnent pas.");
+                    alert1.setContentText("Le mot de passe rentré ne correspond pas à celui actuel, ou les deux nouveaux mots de passe ne correspondent pas.");
                     alert1.setHeaderText(null);
                     alert1.showAndWait();
 
