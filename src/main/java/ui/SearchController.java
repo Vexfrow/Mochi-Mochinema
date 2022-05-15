@@ -51,10 +51,6 @@ public class SearchController {
     
 
     public void initialize(){
-        pane_main.setPrefHeight(400);
-        pane_main.setPrefWidth(600);
-        pane_main.setMinHeight(400);
-        pane_main.setMinWidth(600);
         SelectRecords sr = new SelectRecords();
         Professionel[] listeActeur = sr.selectAllActeurs();
         int i = 0;
