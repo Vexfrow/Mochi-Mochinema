@@ -2,6 +2,7 @@ package ui;
 
 import java.io.IOException;
 
+import SQL.DeleteRecords;
 import SQL.InsertRecords;
 import SQL.SelectRecords;
 import SQL.UpgradeRecords;
@@ -33,6 +34,9 @@ public class CommentaireController {
 
     @FXML
     private Button button_submit;
+
+    @FXML
+    private Button button_delete;
 
     private Abonne abonne;
     private Film film;
@@ -80,9 +84,10 @@ public class CommentaireController {
         Critique c = sr.selectPrevCrit(pseudo, filmID);
         previousCom = c != null;
         loadPrevCom();
+        button_delete.setDisable(!previousCom);
     }
 
-    public void loadPrevCom(){
+    private void loadPrevCom(){
         SelectRecords sr = new SelectRecords();
         Critique c = sr.selectPrevCrit(this.abonne.getPseudo(), this.film.getID());
         if(previousCom){
@@ -91,7 +96,7 @@ public class CommentaireController {
         }
     }
  
-    public boolean estNombre(String s){
+    private boolean estNombre(String s){
         int i = 0;
         while(i < s.length() && (s.charAt(i) >= '0' && s.charAt(i) <= '9')){
             i++;
@@ -99,6 +104,12 @@ public class CommentaireController {
         return i == s.length();
     }
 
-
+    @FXML
+    private void SupprimerCom() throws IOException{
+        DeleteRecords dr = new DeleteRecords();
+        dr.deleteCommentaireParticulier(abonne.getPseudo(), film.getID());
+        exit();
+       
+    }
 
 }
