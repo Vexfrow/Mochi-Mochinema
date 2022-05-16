@@ -190,7 +190,7 @@ import mochinema.Professionel;
 
 
         public int[] selectAllAnneeFilm(){  
-            String sql = "SELECT DISTINCT film_annee_production FROM film;";  
+            String sql = "SELECT DISTINCT film_annee_production FROM film ORDER BY film_annee_production ASC;";  
         
             String sqlNbProfessionel = "SELECT COUNT(DISTINCT film_annee_production) AS number FROM film ;";
               
@@ -349,9 +349,48 @@ import mochinema.Professionel;
 
 
         //Permet de récuperer un tableau contenant tout les film sortis après une année demandée
-        public Film[] selectFilmAnneeActeur(String nom, String prenom, String dateNaissance, int annee) {
+        public Film[] selectFilmAnneeActeurIntersection(String nom, String prenom, String dateNaissance, int annee) {
             String sql = "SELECT film_titre, film_id, film_annee_production FROM film WHERE film_annee_production >= "+ annee
                         + " INTERSECT "
+                        + "SELECT film_titre, film_id, film_annee_production FROM participant JOIN film USING (film_id) \n WHERE professionel_nom = '"+nom+"' AND professionel_prenom = '"+prenom+"' AND professionel_date_naissance = '"+dateNaissance+"' "
+                        + "ORDER BY film_annee_production ASC;";
+
+              
+            try {  
+                Connection conn = this.connect();  
+                Statement stmt  = conn.createStatement();  
+                ResultSet rs    = stmt.executeQuery(sql);  
+
+                int taille = 0;
+                while(rs.next()){
+                    taille++;
+                }
+
+                Film[] tabFilm = new Film[taille];
+
+                rs = stmt.executeQuery(sql);  
+                int i = 0;
+
+                while (rs.next()) {  
+                    tabFilm[i] = new Film(rs.getInt("film_id"), rs.getString("film_titre"), rs.getInt("film_annee_production"));
+                    i++;
+                }  
+
+                stmt.close();
+                return tabFilm;
+
+            } catch (SQLException e) {  
+                System.out.println(e.getMessage()); 
+                return null;
+            }  
+        }
+
+
+
+        //Permet de récuperer un tableau contenant tout les film sortis après une année demandée
+        public Film[] selectFilmAnneeActeurUnion(String nom, String prenom, String dateNaissance, int annee) {
+            String sql = "SELECT film_titre, film_id, film_annee_production FROM film WHERE film_annee_production >= "+ annee
+                        + " UNION "
                         + "SELECT film_titre, film_id, film_annee_production FROM participant JOIN film USING (film_id) \n WHERE professionel_nom = '"+nom+"' AND professionel_prenom = '"+prenom+"' AND professionel_date_naissance = '"+dateNaissance+"' "
                         + "ORDER BY film_annee_production ASC;";
 

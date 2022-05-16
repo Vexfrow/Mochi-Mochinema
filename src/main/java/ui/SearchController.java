@@ -1,12 +1,15 @@
 package ui;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import SQL.SelectRecords;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -105,7 +108,20 @@ public class SearchController {
             
         }else{
             //Recherche par acteur et année
-            listeFilm = sr.selectFilmAnneeActeur(choice_acteur.getValue().getNom(), choice_acteur.getValue().getPrenom(), choice_acteur.getValue().getDateNaissance(),choice_annee.getValue());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.getButtonTypes().clear();
+            alert.setContentText("Voulez vous des résultats qui correspondent aux deux critères (intersection), ou qui peuvent correspondre à un seul (union) ?");
+            ButtonType button_deux = new ButtonType("Les deux");
+            ButtonType button_un = new ButtonType("Un seul");
+            alert.getButtonTypes().add(button_deux);
+            alert.getButtonTypes().add(button_un);
+            alert.setHeaderText(null);
+            Optional<ButtonType> option = alert.showAndWait();
+            if(option.get() == button_deux){
+                listeFilm = sr.selectFilmAnneeActeurIntersection(choice_acteur.getValue().getNom(), choice_acteur.getValue().getPrenom(), choice_acteur.getValue().getDateNaissance(),choice_annee.getValue());
+            }else{
+                listeFilm = sr.selectFilmAnneeActeurUnion(choice_acteur.getValue().getNom(), choice_acteur.getValue().getPrenom(), choice_acteur.getValue().getDateNaissance(),choice_annee.getValue());
+            }
         }
         afficherFilm(listeFilm);
     }
