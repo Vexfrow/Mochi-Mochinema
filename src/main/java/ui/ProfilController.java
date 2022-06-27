@@ -293,8 +293,10 @@ public class ProfilController {
 
     
     @FXML
-    public void setAbonne(Abonne a){
-        abonne = a;
+    public void setAbonne(String pseudo){
+        SelectRecords sr = new SelectRecords();
+        sr.selectAbonneSpecifique(pseudo);
+        abonne = sr.selectAbonneSpecifique(pseudo);
         text_info.setText("Profil de " + abonne.getPseudo());
         showCritique();   
     }

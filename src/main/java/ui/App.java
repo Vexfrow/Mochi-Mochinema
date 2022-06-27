@@ -22,7 +22,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try{
-            this.stage = stage;
+            App.stage = stage;
             Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
             scene = new Scene(root);
             stage.setResizable(false);

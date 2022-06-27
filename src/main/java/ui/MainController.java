@@ -46,7 +46,7 @@ public class MainController {
         root = newRoot.load();
 
         ProfilController profilC = newRoot.getController();
-        profilC.setAbonne(abonne);
+        profilC.setAbonne(abonne.getPseudo());
 
         App.newSceneAbonne(root);
     }
